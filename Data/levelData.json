@@ -1,0 +1,24 @@
+{ "levels": [
+    {
+        "level_id": 1,
+        "level_name": "Forest of Beginnings",
+        "difficulty": "Easy",
+        "enemy_resource": "res://Data/enemies/monster_01.tres",
+        "max_enemies": 5,
+        "background_music": "res://Audio/forest_theme.ogg"
+    },
+    {
+        "level_id": 2,
+        "level_name": "Cave of Shadows",
+        "difficulty": "Medium",
+        "max_enemies": 10,
+        "background_music": "res://Audio/cave_theme.ogg"
+    },
+    {
+        "level_id": 3,
+        "level_name": "Desert of Despair",
+        "difficulty": "Hard",
+        "max_enemies": 15,
+        "background_music": "res://Audio/desert_theme.ogg"
+    }
+]}

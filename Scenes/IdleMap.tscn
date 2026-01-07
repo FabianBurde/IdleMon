@@ -1,0 +1,175 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc7rscjmltcwd"]
+
+[ext_resource type="PackedScene" uid="uid://bk3dypbp6ujna" path="res://Scenes/upgrade_button.tscn" id="1_dfmsr"]
+[ext_resource type="Script" uid="uid://c2v4ck6tq6gpr" path="res://Scripts/idle_map.gd" id="1_mxbe6"]
+[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_ww72c"]
+[ext_resource type="PackedScene" uid="uid://b6kgv6t2es18u" path="res://Scenes/game_scene.tscn" id="3_fu7im"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ww72c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dfmsr"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_ww72c")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 1.0003333
+anchor_bottom = 1.0003334
+offset_right = -0.3840332
+offset_bottom = -0.21606445
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mxbe6")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14044744, 0.14044744, 0.14044744, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBButtons" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+z_index = 1
+layout_mode = 2
+
+[node name="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons" instance=ExtResource("1_dfmsr")]
+layout_mode = 2
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons"]
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+texture_pressed = SubResource("NoiseTexture2D_dfmsr")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBButtons/TextureButton2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4448125
+anchor_top = 0.033333335
+anchor_right = 0.77381253
+anchor_bottom = 0.064333335
+offset_left = 0.063999176
+offset_right = -0.04800415
+offset_bottom = 0.44999695
+grow_horizontal = 2
+text = "+5"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton3" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons"]
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+texture_pressed = SubResource("NoiseTexture2D_dfmsr")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBButtons/TextureButton3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4448125
+anchor_top = 0.033333335
+anchor_right = 0.77381253
+anchor_bottom = 0.064333335
+offset_left = 0.063999176
+offset_right = -0.04800415
+offset_bottom = 0.44999695
+grow_horizontal = 2
+text = "+10"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton4" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons"]
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+texture_pressed = SubResource("NoiseTexture2D_dfmsr")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBButtons/TextureButton4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4448125
+anchor_top = 0.033333335
+anchor_right = 0.77381253
+anchor_bottom = 0.064333335
+offset_left = 0.063999176
+offset_right = -0.04800415
+offset_bottom = 0.44999695
+grow_horizontal = 2
+text = "+20"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.31764707)
+layout_mode = 2
+texture = ExtResource("1_ww72c")
+
+[node name="MoneyLBL" type="RichTextLabel" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.402
+anchor_right = 0.59800005
+anchor_bottom = 0.312
+offset_left = 0.2199707
+offset_right = -0.22009277
+offset_bottom = 0.063999176
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "123123"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(33, 333)
+layout_mode = 2
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+
+[node name="HBoxContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.4380001
+offset_top = 4.0
+offset_bottom = 0.14596558
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/HBoxContainer"]
+handle_input_locally = false
+size = Vector2i(990, 475)
+render_target_update_mode = 4
+
+[node name="GameScene" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/HBoxContainer/SubViewport" instance=ExtResource("3_fu7im")]
+
+[node name="MonsterBtn" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control"]
+z_index = 7
+custom_minimum_size = Vector2(333, 333)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3272727
+anchor_top = 0.009009009
+anchor_right = 0.66327274
+anchor_bottom = 1.009009
+offset_right = 0.35998535
+mouse_default_cursor_shape = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterBtn" to="." method="attack_emeny"]

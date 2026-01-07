@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://gndk4xn126uf"]
+
+[ext_resource type="Script" uid="uid://dierx8t2eapr" path="res://Scripts/Util/dmg_num_util.gd" id="1_n075d"]
+
+[node name="DamageNum" type="Label"]
+self_modulate = Color(1, 0.13999999, 0.13999999, 1)
+anchors_preset = -1
+anchor_left = -0.003
+anchor_top = -0.03397531
+anchor_right = 0.011999999
+anchor_bottom = 0.051999997
+offset_left = -0.5439999
+offset_top = 11.016001
+offset_right = 0.1760006
+offset_bottom = 0.30400085
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "2"
+script = ExtResource("1_n075d")
+metadata/_edit_use_anchors_ = true

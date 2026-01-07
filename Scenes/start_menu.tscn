@@ -1,0 +1,186 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn8w1xqlbm5ev"]
+
+[ext_resource type="Script" uid="uid://cupkk6ye5tsxc" path="res://Scripts/start_menu.gd" id="1_jgtwh"]
+[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="2_m6uer"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jgtwh")
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1880.0
+offset_bottom = 1040.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16014051, 0.06912111, 0.10354934, 1)
+
+[node name="BtnContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -50.5
+offset_right = 35.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="BtnContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Button2" type="Button" parent="BtnContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Button3" type="Button" parent="BtnContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Settings" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38900003
+anchor_top = 0.33400002
+anchor_right = 0.611
+anchor_bottom = 0.666
+offset_left = 0.37194824
+offset_top = 0.067993164
+offset_right = -0.37200928
+offset_bottom = -0.067993164
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Graphics:"
+
+[node name="ResolutionSelect" type="OptionButton" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Audio:"
+
+[node name="Label3" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Master"
+
+[node name="master_slider" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Music:"
+
+[node name="music_slider" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "SFX:"
+
+[node name="sfx_slider" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="TextureButton" parent="Settings"]
+layout_mode = 2
+texture_normal = ExtResource("2_m6uer")
+
+[node name="GameSlots" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36031252
+anchor_top = 0.24834572
+anchor_right = 0.63968754
+anchor_bottom = 0.7516544
+offset_left = -0.08001709
+offset_top = 0.07197571
+offset_right = 0.079956055
+offset_bottom = -0.072052
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot1" type="HBoxContainer" parent="GameSlots"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameSlots/Slot1"]
+self_modulate = Color(0.105882354, 0.105882354, 0.105882354, 0.40784314)
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+texture = ExtResource("2_m6uer")
+
+[node name="Label" type="Label" parent="GameSlots/Slot1/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Slot1"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameSlots/Slot1/TextureRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "Playtime: 12H 32min
+100k Gold
+Rebirths: 5
+Kingdoms Explored: 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="GameSlots/Slot1/TextureRect"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.054
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 0.039993286
+
+[connection signal="pressed" from="BtnContainer/Button" to="." method="on_Start"]
+[connection signal="pressed" from="BtnContainer/Button2" to="." method="on_Settings"]
+[connection signal="pressed" from="BtnContainer/Button3" to="." method="on_Exit"]
+[connection signal="item_selected" from="Settings/VBoxContainer/ResolutionSelect" to="." method="change_resolution"]
+[connection signal="pressed" from="Settings/CloseButton" to="." method="on_Settings"]
+[connection signal="pressed" from="GameSlots/Slot1/TextureRect/TextureButton" to="." method="load_game_slot"]

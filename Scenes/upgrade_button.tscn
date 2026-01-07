@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk3dypbp6ujna"]
+
+[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_lmwtk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ww72c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dfmsr"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_ww72c")
+
+[node name="TextureRect" type="TextureRect"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 44.0
+grow_horizontal = 2
+texture = ExtResource("1_lmwtk")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+texture_normal = ExtResource("1_lmwtk")
+texture_pressed = SubResource("NoiseTexture2D_dfmsr")
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4448125
+anchor_top = 0.033333335
+anchor_right = 0.77381253
+anchor_bottom = 0.064333335
+offset_left = 0.063999176
+offset_right = -0.04800415
+offset_bottom = 0.44999695
+grow_horizontal = 2
+text = "+1"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Cost"
