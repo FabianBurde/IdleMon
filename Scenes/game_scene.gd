@@ -10,20 +10,20 @@ var current_monster:Node3D = null
 var z_step = 2.0
 var current_z
 
-signal ememy_dead
-signal new_enemy
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_monster()
-
+	SignalBus.enemy_dead.connect(start_stop_walk)
 func spawn_monster() -> void:
 	if current_monster:
 		current_monster.queue_free()
 	current_monster = monster_scene.instantiate()
 	add_child(current_monster)
 	current_monster.position = Vector3(0,0,-1)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -32,7 +32,15 @@ func _process(delta: float) -> void:
 		if cam.position.z <= -z_step:
 			start_stop_walk()
 			z_step += 2.0
+			#spawn_monster()
+			reset_scene()
 
 
 func start_stop_walk() -> void:
 	is_moving = !is_moving
+
+func reset_scene() -> void:
+	cam.position = Vector3(0,0,0)
+	z_step = 2.0
+	is_moving = false
+	spawn_monster()

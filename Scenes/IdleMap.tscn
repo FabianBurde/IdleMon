@@ -4,15 +4,10 @@
 [ext_resource type="Script" uid="uid://c2v4ck6tq6gpr" path="res://Scripts/idle_map.gd" id="1_mxbe6"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_ww72c"]
 [ext_resource type="PackedScene" uid="uid://b6kgv6t2es18u" path="res://Scenes/game_scene.tscn" id="3_fu7im"]
+[ext_resource type="Texture2D" uid="uid://b84nl6ua56o17" path="res://Assets/Btn/MenuButtonPressed.png" id="6_8esda"]
+[ext_resource type="PackedScene" uid="uid://dhooyin4yi0ui" path="res://Scenes/Util/ArmyUnitUtil.tscn" id="6_nvpqu"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ww72c"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dfmsr"]
-width = 128
-height = 128
-noise = SubResource("FastNoiseLite_ww72c")
-
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("game_scene")]
 layout_mode = 3
 anchor_right = 1.0003333
 anchor_bottom = 1.0003334
@@ -21,6 +16,7 @@ offset_bottom = -0.21606445
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mxbe6")
+game_scene = NodePath("MarginContainer/HBoxContainer2/VBoxContainer/Control/HBoxContainer/SubViewport/GameScene")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -54,63 +50,6 @@ layout_mode = 2
 [node name="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons" instance=ExtResource("1_dfmsr")]
 layout_mode = 2
 
-[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons"]
-layout_mode = 2
-texture_normal = ExtResource("1_ww72c")
-texture_pressed = SubResource("NoiseTexture2D_dfmsr")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBButtons/TextureButton2"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.4448125
-anchor_top = 0.033333335
-anchor_right = 0.77381253
-anchor_bottom = 0.064333335
-offset_left = 0.063999176
-offset_right = -0.04800415
-offset_bottom = 0.44999695
-grow_horizontal = 2
-text = "+5"
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureButton3" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons"]
-layout_mode = 2
-texture_normal = ExtResource("1_ww72c")
-texture_pressed = SubResource("NoiseTexture2D_dfmsr")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBButtons/TextureButton3"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.4448125
-anchor_top = 0.033333335
-anchor_right = 0.77381253
-anchor_bottom = 0.064333335
-offset_left = 0.063999176
-offset_right = -0.04800415
-offset_bottom = 0.44999695
-grow_horizontal = 2
-text = "+10"
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureButton4" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons"]
-layout_mode = 2
-texture_normal = ExtResource("1_ww72c")
-texture_pressed = SubResource("NoiseTexture2D_dfmsr")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBButtons/TextureButton4"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.4448125
-anchor_top = 0.033333335
-anchor_right = 0.77381253
-anchor_bottom = 0.064333335
-offset_left = 0.063999176
-offset_right = -0.04800415
-offset_bottom = 0.44999695
-grow_horizontal = 2
-text = "+20"
-metadata/_edit_use_anchors_ = true
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -121,7 +60,7 @@ self_modulate = Color(1, 1, 1, 0.31764707)
 layout_mode = 2
 texture = ExtResource("1_ww72c")
 
-[node name="MoneyLBL" type="RichTextLabel" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect"]
+[node name="GoldLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -135,7 +74,36 @@ grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "123123"
+scroll_active = false
 horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028353535
+anchor_top = 0.031375002
+anchor_right = 0.13335356
+anchor_bottom = 0.38237503
+offset_left = -0.069999695
+offset_top = -0.01600027
+offset_right = -0.020019531
+offset_bottom = 0.05599594
+metadata/_edit_use_anchors_ = true
+
+[node name="ExpBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6171875
+anchor_right = 0.28242424
+anchor_bottom = 0.99950004
+offset_right = 0.3999977
+offset_bottom = 0.063999176
+rounded = true
+nine_patch_stretch = true
+texture_progress = ExtResource("1_ww72c")
+metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(33, 333)
@@ -172,4 +140,54 @@ offset_right = 0.35998535
 mouse_default_cursor_shape = 3
 metadata/_edit_use_anchors_ = true
 
+[node name="MonsterHealthBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3648485
+anchor_top = 0.003003003
+anchor_right = 0.63515157
+anchor_bottom = 0.116997
+offset_left = -0.2000122
+offset_right = 0.19995117
+offset_bottom = 0.0399971
+grow_horizontal = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_ww72c")
+texture_progress = ExtResource("6_8esda")
+metadata/_edit_use_anchors_ = true
+
+[node name="MonsterHealthLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterHealthBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425
+anchor_top = 0.132
+anchor_right = 0.57500005
+anchor_bottom = 0.80300003
+offset_left = 0.099998474
+offset_top = -0.015999794
+offset_right = -0.1000061
+offset_bottom = -0.014001846
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ArmyContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.1531532
+anchor_right = 1.0
+anchor_bottom = 1.2848469
+offset_bottom = 0.14596558
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/ArmyContainer" instance=ExtResource("6_nvpqu")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBButtons/TextureButton" to="." method="buy_unit_01"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterBtn" to="." method="attack_emeny"]

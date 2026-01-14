@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhooyin4yi0ui"]
+
+[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_h7jpo"]
+
+[node name="MarginContainer" type="MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = -1
+anchor_right = 0.03287501
+anchor_bottom = 0.062197555
+offset_right = 0.12799072
+offset_bottom = -0.3040161
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_h7jpo")
+expand_mode = 1

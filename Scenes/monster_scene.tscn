@@ -11,3 +11,5 @@ enemy_resource = ExtResource("2_m3kkw")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
 texture = ExtResource("1_b81yp")
+
+[node name="NameLBL" type="Label3D" parent="."]

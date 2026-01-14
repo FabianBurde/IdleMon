@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 LevelManager="*res://Scripts/Singletons/LevelManager.gd"
 ResourceManager="*res://Scripts/Singletons/Ressources.gd"
+SignalBus="*res://Scripts/Singletons/SignalBus.gd"
 
 [display]
 
