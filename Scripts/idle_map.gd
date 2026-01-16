@@ -46,6 +46,7 @@ func buy_unit_01() -> void:
 		ResourceManager.add_gold(-unit_cost)
 		var unit_icon = preload("res://Scenes/Util/ArmyUnitUtil.tscn").instantiate()
 		army_container.add_child(unit_icon)
+		unit_icon.call_deferred("_set_random_stats", 10, 100)
 		#unit_icon.unit_name_lbl.text = "Soldier"
 		#unit_icon.unit_level_lbl.text = "Lvl 1"
 	else:

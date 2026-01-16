@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitRes" load_steps=2 format=3 uid="uid://cfw7cstvqwgp4"]
+
+[ext_resource type="Script" uid="uid://bbbibt84m7cjw" path="res://Data/unit.gd" id="1_c6255"]
+
+[resource]
+script = ExtResource("1_c6255")
+unit_name = "Swordsman"
+base_stat_points = 100
+metadata/_custom_type_script = "uid://bbbibt84m7cjw"

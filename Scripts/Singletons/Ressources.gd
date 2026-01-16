@@ -1,7 +1,7 @@
 class_name  Ressources
 extends Node
 
-var global_gold: int = 0
+var global_gold: int = 10
 var max_level_progress: = 1
 var entity_dict = {}
 var player_stats = {
