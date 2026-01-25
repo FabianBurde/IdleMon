@@ -9,10 +9,19 @@ var player_stats = {
 	"exp": 0,
 	"attack": 1,
 }
+var save_timer: Timer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await get_tree().create_timer(1.0).timeout
 	SignalBus.update_ui_info.emit(global_gold, player_stats["exp"], player_stats["lvl"])
-
+	save_timer = Timer.new()
+	save_timer.wait_time = 30.0
+	save_timer.one_shot = false
+	save_timer.autostart = true
+	add_child(save_timer)
+	save_timer.start()
+	save_timer.timeout.connect( save_game )
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,7 +53,9 @@ func new_save_file():
 
 func save_game(path: String) -> void:
 	var save_data = {}
+	path = "res://Data/savefiles/savefile.res"
 	save_data["global_gold"] = global_gold
 	save_data["max_level_progress"] = max_level_progress
 	save_data["entity_dict"] = entity_dict
-	ResourceSaver.save(save_data)
+	save_data["player_stats"] = player_stats
+	print(save_data)

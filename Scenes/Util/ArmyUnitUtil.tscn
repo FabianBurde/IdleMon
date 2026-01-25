@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhooyin4yi0ui"]
+[gd_scene load_steps=6 format=3 uid="uid://dhooyin4yi0ui"]
 
 [ext_resource type="Script" uid="uid://dfctjtmdgh0rl" path="res://Scripts/Util/army_unit_util.gd" id="1_7nvu4"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_h7jpo"]
+[ext_resource type="Theme" uid="uid://dsa37ceqer2sb" path="res://Assets/MainTheme.tres" id="1_w1cea"]
 [ext_resource type="Resource" uid="uid://cfw7cstvqwgp4" path="res://Data/Units/meele_unit_01.tres" id="2_lpgia"]
+[ext_resource type="Texture2D" uid="uid://b8fw5g23qo5nb" path="res://Assets/Util/Start_Progress.png" id="5_jipwb"]
 
 [node name="UnitContainer" type="MarginContainer"]
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = -1
 anchor_right = 0.03287501
 anchor_bottom = 0.062197555
-offset_right = 0.12799072
+offset_right = 2.1279907
 offset_bottom = -0.3040161
-tooltip_text = "123123123123sdfsdfsfd"
+theme = ExtResource("1_w1cea")
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
@@ -20,7 +22,30 @@ script = ExtResource("1_7nvu4")
 army_unit = ExtResource("2_lpgia")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Sprite" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(34, 36)
 layout_mode = 2
 texture = ExtResource("1_h7jpo")
-expand_mode = 1
+expand_mode = 2
+
+[node name="StarProgress" type="TextureProgressBar" parent="Sprite"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.30600002
+offset_bottom = -0.016000748
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+value = 1.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_jipwb")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="mouse_entered" from="." to="." method="unit_hovered"]
+[connection signal="mouse_exited" from="." to="." method="unit_unhovered"]
+[connection signal="timeout" from="AttackTimer" to="." method="attack_timeout"]

@@ -1,7 +1,9 @@
 extends Node
 
 signal enemy_dead
+signal enemy_spawned
 signal update_ui_info(gold,exp,level)
+signal unit_attack(attack_value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

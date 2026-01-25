@@ -14,6 +14,8 @@ var dmg_num_util = preload("res://Scenes/Util/DmgNumUtil.tscn")
 func _ready() -> void:
 	SignalBus.update_ui_info.connect(update_ui_info)
 	
+	SignalBus.unit_attack.connect(attack_emeny)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +29,10 @@ func update_ui_info(gold, experience, level) -> void:
 	exp_bar.value = experience
 	exp_bar.max_value = exp_to_next_level
 
-func attack_emeny() -> void:
+func player_attack() -> void:
+	attack_emeny(ResourceManager.player_stats["attack"])
+
+func attack_emeny(attack_value) -> void:
 	if !game_scene.current_monster:
 		return
 	print("Attack Enemy")
@@ -35,7 +40,7 @@ func attack_emeny() -> void:
 	num.global_position = get_viewport().get_mouse_position()
 	num.global_position.y -= randi() % 20
 	add_child(num)
-	game_scene.current_monster.take_damage(ResourceManager.player_stats["attack"])
+	game_scene.current_monster.take_damage(attack_value)
 	monster_health_bar.value = game_scene.current_monster.current_health
 	monster_health_lbl.text = str(game_scene.current_monster.current_health)
 
@@ -47,7 +52,12 @@ func buy_unit_01() -> void:
 		var unit_icon = preload("res://Scenes/Util/ArmyUnitUtil.tscn").instantiate()
 		army_container.add_child(unit_icon)
 		unit_icon.call_deferred("_set_random_stats", 10, 100)
+		ResourceManager.entity_dict[unit_icon.get_instance_id()] = unit_icon.army_unit
 		#unit_icon.unit_name_lbl.text = "Soldier"
 		#unit_icon.unit_level_lbl.text = "Lvl 1"
 	else:
 		print("Not enough gold to buy unit.")
+
+
+func manual_save() -> void:
+	ResourceManager.save_game("")

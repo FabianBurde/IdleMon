@@ -18,8 +18,8 @@ func _ready() -> void:
 	spawn_monster()
 	SignalBus.enemy_dead.connect(start_stop_walk)
 func spawn_monster() -> void:
-	if current_monster:
-		current_monster.queue_free()
+	#if current_monster:
+	#	current_monster.queue_free()
 	current_monster = monster_scene.instantiate()
 	add_child(current_monster)
 	current_monster.position = Vector3(0,0,-1)

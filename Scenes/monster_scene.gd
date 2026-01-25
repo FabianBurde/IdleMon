@@ -10,6 +10,7 @@ var current_health
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.enemy_spawned.emit()
 	current_health = enemy_resource.health
 	if enemy_resource:
 		mon_spr.texture = enemy_resource.enemy_tex

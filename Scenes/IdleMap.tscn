@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc7rscjmltcwd"]
+[gd_scene load_steps=6 format=3 uid="uid://cc7rscjmltcwd"]
 
 [ext_resource type="PackedScene" uid="uid://bk3dypbp6ujna" path="res://Scenes/upgrade_button.tscn" id="1_dfmsr"]
 [ext_resource type="Script" uid="uid://c2v4ck6tq6gpr" path="res://Scripts/idle_map.gd" id="1_mxbe6"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_ww72c"]
 [ext_resource type="PackedScene" uid="uid://b6kgv6t2es18u" path="res://Scenes/game_scene.tscn" id="3_fu7im"]
 [ext_resource type="Texture2D" uid="uid://b84nl6ua56o17" path="res://Assets/Btn/MenuButtonPressed.png" id="6_8esda"]
-[ext_resource type="PackedScene" uid="uid://dhooyin4yi0ui" path="res://Scenes/Util/ArmyUnitUtil.tscn" id="6_nvpqu"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("game_scene")]
 layout_mode = 3
@@ -49,6 +48,10 @@ layout_mode = 2
 
 [node name="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons" instance=ExtResource("1_dfmsr")]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer2/VBButtons"]
+layout_mode = 2
+text = "SAVE"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
@@ -185,9 +188,6 @@ grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/ArmyContainer" instance=ExtResource("6_nvpqu")]
-visible = false
-layout_mode = 2
-
 [connection signal="pressed" from="MarginContainer/HBoxContainer2/VBButtons/TextureButton" to="." method="buy_unit_01"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterBtn" to="." method="attack_emeny"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBButtons/Button" to="." method="manual_save"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterBtn" to="." method="player_attack"]
