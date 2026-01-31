@@ -7,6 +7,15 @@ var available_resolutions: Array = [Vector2(800, 600), Vector2(1024, 768), Vecto
 @onready var game_slots_menu: VBoxContainer = %GameSlots
 var config = ConfigFile.new()
 
+@onready var slot1_stats = %Slot1Stats
+@onready var slot2_stats = %Slot2Stats
+@onready var slot3_stats = %Slot3Stats
+
+
+const SAVE_01:= "user://SaveSlot1.tres"
+const SAVE_02:= "user://SaveSlot2.tres"
+const SAVE_03:= "user://SaveSlot3.tres"
+var save_game: SaveGame = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -51,11 +60,44 @@ func _process(delta: float) -> void:
 func on_Start() -> void:
 	# Show Gameslots
 	buttons_menu.visible = false
+	#for child in game_slots_menu.get_children(()
+	if ResourceLoader.exists(SAVE_01):
+		save_game = ResourceLoader.load(SAVE_01,"",ResourceLoader.CACHE_MODE_IGNORE)
+		slot1_stats.text = str(save_game.global_gold)
+	else:
+		slot1_stats.text = "EMPTY"
+	if ResourceLoader.exists(SAVE_02):
+		save_game = ResourceLoader.load(SAVE_02,"",ResourceLoader.CACHE_MODE_IGNORE)
+		slot2_stats.text = str(save_game.global_gold)
+	else:
+		slot2_stats.text = "EMPTY"
+	if ResourceLoader.exists(SAVE_03):
+		save_game = ResourceLoader.load(SAVE_03,"",ResourceLoader.CACHE_MODE_IGNORE)
+		slot3_stats.text = str(save_game.global_gold)
+	else:
+		slot3_stats.text = "EMPTY"
+				
+			
+
 	game_slots_menu.visible = true
+
 	pass
 
-func load_game_slot():
-	get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+func load_game_slot_01():
+	### For saves in Savefiles show slots ###
+	print("test")
+	if ResourceLoader.exists("user://SaveSlot1.tres"):
+		ResourceManager.active_save_file_path = "user://SaveSlot1.tres"
+		ResourceManager.active_save_game = ResourceLoader.load("user://SaveSlot1.tres","",ResourceLoader.CACHE_MODE_IGNORE)
+		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+		ResourceManager.load_savefile()
+	else:
+		ResourceManager.active_save_game = SaveGame.new()
+		ResourceManager.active_save_file_path = "user://SaveSlot1.tres"
+		ResourceManager.new_game = true
+		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot1.tres")
+		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+	
 
 func on_Settings() -> void:
 	# Show Settings Menu

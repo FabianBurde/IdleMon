@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MonsterRes" format=3 uid="uid://bg23s1uycgrc4"]
+
+[ext_resource type="Script" uid="uid://de3ufjp505n66" path="res://Data/monster.gd" id="1_qmf46"]
+
+[sub_resource type="Gradient" id="Gradient_qmf46"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_updwd"]
+gradient = SubResource("Gradient_qmf46")
+
+[resource]
+script = ExtResource("1_qmf46")
+health = 300.0
+attack = 12.0
+attack_rate = 4.0
+enemy_tex = SubResource("GradientTexture2D_updwd")
+enemy_name = "BunnyBoss"
+gold_reward = 5
+exp_reward = 10
+metadata/_custom_type_script = "uid://de3ufjp505n66"

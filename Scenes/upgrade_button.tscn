@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk3dypbp6ujna"]
+[gd_scene format=3 uid="uid://bk3dypbp6ujna"]
 
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_lmwtk"]
+[ext_resource type="Script" uid="uid://c3615vqjr7waw" path="res://Scripts/Util/buy_button.gd" id="2_yieou"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ww72c"]
 
@@ -9,7 +10,7 @@ width = 128
 height = 128
 noise = SubResource("FastNoiseLite_ww72c")
 
-[node name="TextureButton" type="TextureButton"]
+[node name="UnitBuyBtn" type="TextureButton" unique_id=1261515048]
 anchors_preset = -1
 anchor_right = 0.11100001
 anchor_bottom = 0.19800001
@@ -17,8 +18,9 @@ offset_right = 0.12799072
 offset_bottom = -0.3040161
 texture_normal = ExtResource("1_lmwtk")
 texture_pressed = SubResource("NoiseTexture2D_dfmsr")
+script = ExtResource("2_yieou")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=909030406]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4448125
@@ -32,16 +34,17 @@ grow_horizontal = 2
 text = "+1"
 metadata/_edit_use_anchors_ = true
 
-[node name="Label2" type="Label" parent="."]
+[node name="CostLBL" type="Label" parent="." unique_id=1404389538]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = -1
+anchor_left = 0.23462501
+anchor_top = 0.82000005
+anchor_right = 0.546625
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
+offset_left = -0.032001495
+offset_top = 0.039993286
+offset_right = 0.03199768
 grow_horizontal = 2
 grow_vertical = 0
 text = "Cost"
+metadata/_edit_use_anchors_ = true

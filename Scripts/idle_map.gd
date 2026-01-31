@@ -9,12 +9,16 @@ var dmg_num_util = preload("res://Scenes/Util/DmgNumUtil.tscn")
 @onready var level_lbl:Label = %LevelLabel
 @onready var exp_bar:TextureProgressBar = %ExpBar
 @onready var army_container:HBoxContainer = %ArmyContainer
+@onready var lvl_progress_lbl:Label = %LevelProgressLabel
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.update_ui_info.connect(update_ui_info)
-	
+	SignalBus.units_loaded.connect( load_army_units )
 	SignalBus.unit_attack.connect(attack_emeny)
+	ResourceManager.load_savefile()
 	
 
 
@@ -22,13 +26,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func update_ui_info(gold, experience, level) -> void:
+func update_ui_info(gold, experience, level,lvlprogress) -> void:
 	gold_lbl.text = str(gold)
-	level_lbl.text = "Level " + str(level)
+	level_lbl.text = "Level %d\n Exp:%d \n Attack: %d" % [level, experience, ResourceManager.player_stats["attack"]]	
 	var exp_to_next_level = level * 10
 	exp_bar.value = experience
-	exp_bar.max_value = exp_to_next_level
-
+	exp_bar.max_value = (exp_to_next_level)
+	lvl_progress_lbl.text = "Level Progress: %d%%" % [lvlprogress]
 func player_attack() -> void:
 	attack_emeny(ResourceManager.player_stats["attack"])
 
@@ -46,8 +50,10 @@ func attack_emeny(attack_value) -> void:
 
 
 func buy_unit_01() -> void:
-	var unit_cost = 2
+	var unit_cost = UnitManager.unit_cost_dict["Soldier"]
 	if ResourceManager.global_gold >= unit_cost:
+		UnitManager.unit_cost_dict["Soldier"] += 1
+		SignalBus.unit_bought.emit("Soldier")
 		ResourceManager.add_gold(-unit_cost)
 		var unit_icon = preload("res://Scenes/Util/ArmyUnitUtil.tscn").instantiate()
 		army_container.add_child(unit_icon)
@@ -58,6 +64,21 @@ func buy_unit_01() -> void:
 	else:
 		print("Not enough gold to buy unit.")
 
+func load_army_units() -> void:
+	for unit in ResourceManager.entity_dict.keys():
+		var unit_icon = preload("res://Scenes/Util/ArmyUnitUtil.tscn").instantiate()
+		unit_icon.army_unit = ResourceManager.entity_dict[unit]
+		army_container.add_child(unit_icon)
+		#quick fix because enemy spawn signal fires before units are fully ready
+		SignalBus.enemy_spawned.emit()
+		
+		#unit_icon.call_deferred("_update_tooltip_text")
+		#unit_icon.unit_name_lbl.text = "Soldier"
+		#unit_icon.unit_level_lbl.text = "Lvl 1"
 
+### TODO DELETE LATER ###
 func manual_save() -> void:
-	ResourceManager.save_game("")
+	ResourceManager.save_game()
+
+func manual_load() -> void:
+	ResourceManager.load_savefile()

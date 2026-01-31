@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn8w1xqlbm5ev"]
+[gd_scene format=3 uid="uid://cn8w1xqlbm5ev"]
 
 [ext_resource type="Script" uid="uid://cupkk6ye5tsxc" path="res://Scripts/start_menu.gd" id="1_jgtwh"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="2_m6uer"]
 
-[node name="StartMenu" type="Control"]
+[node name="StartMenu" type="Control" unique_id=286178668]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,12 +13,12 @@ grow_vertical = 2
 script = ExtResource("1_jgtwh")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=19113558]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=85943820]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16014051, 0.06912111, 0.10354934, 1)
 
-[node name="BtnContainer" type="VBoxContainer" parent="."]
+[node name="BtnContainer" type="VBoxContainer" parent="." unique_id=421031942]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -44,19 +44,19 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BtnContainer"]
+[node name="Button" type="Button" parent="BtnContainer" unique_id=1108816488]
 layout_mode = 2
 text = "Start"
 
-[node name="Button2" type="Button" parent="BtnContainer"]
+[node name="Button2" type="Button" parent="BtnContainer" unique_id=1224047111]
 layout_mode = 2
 text = "Settings"
 
-[node name="Button3" type="Button" parent="BtnContainer"]
+[node name="Button3" type="Button" parent="BtnContainer" unique_id=303278629]
 layout_mode = 2
 text = "Exit"
 
-[node name="Settings" type="HBoxContainer" parent="."]
+[node name="Settings" type="HBoxContainer" parent="." unique_id=1642273080]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -72,50 +72,51 @@ offset_bottom = -0.067993164
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings" unique_id=1265913178]
 custom_minimum_size = Vector2(255, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Settings/VBoxContainer"]
+[node name="Label" type="Label" parent="Settings/VBoxContainer" unique_id=643509776]
 layout_mode = 2
 text = "Graphics:"
 
-[node name="ResolutionSelect" type="OptionButton" parent="Settings/VBoxContainer"]
+[node name="ResolutionSelect" type="OptionButton" parent="Settings/VBoxContainer" unique_id=1014992862]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Settings/VBoxContainer"]
+[node name="Label2" type="Label" parent="Settings/VBoxContainer" unique_id=77676969]
 layout_mode = 2
 text = "Audio:"
 
-[node name="Label3" type="Label" parent="Settings/VBoxContainer"]
+[node name="Label3" type="Label" parent="Settings/VBoxContainer" unique_id=1670775968]
 layout_mode = 2
 text = "Master"
 
-[node name="master_slider" type="HSlider" parent="Settings/VBoxContainer"]
+[node name="master_slider" type="HSlider" parent="Settings/VBoxContainer" unique_id=1625635786]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="Settings/VBoxContainer"]
+[node name="Label4" type="Label" parent="Settings/VBoxContainer" unique_id=1968669790]
 layout_mode = 2
 text = "Music:"
 
-[node name="music_slider" type="HSlider" parent="Settings/VBoxContainer"]
+[node name="music_slider" type="HSlider" parent="Settings/VBoxContainer" unique_id=1571264289]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="Settings/VBoxContainer"]
+[node name="Label5" type="Label" parent="Settings/VBoxContainer" unique_id=1571644562]
 layout_mode = 2
 text = "SFX:"
 
-[node name="sfx_slider" type="HSlider" parent="Settings/VBoxContainer"]
+[node name="sfx_slider" type="HSlider" parent="Settings/VBoxContainer" unique_id=137493011]
 layout_mode = 2
 
-[node name="CloseButton" type="TextureButton" parent="Settings"]
+[node name="CloseButton" type="TextureButton" parent="Settings" unique_id=412957863]
 layout_mode = 2
 texture_normal = ExtResource("2_m6uer")
 
-[node name="GameSlots" type="VBoxContainer" parent="."]
+[node name="GameSlots" type="VBoxContainer" parent="." unique_id=1566177704]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.36031252
@@ -131,16 +132,16 @@ grow_vertical = 2
 theme_override_constants/separation = 12
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot1" type="HBoxContainer" parent="GameSlots"]
+[node name="Slot1" type="HBoxContainer" parent="GameSlots" unique_id=1571196393]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="GameSlots/Slot1"]
+[node name="TextureRect" type="TextureRect" parent="GameSlots/Slot1" unique_id=347944269]
 self_modulate = Color(0.105882354, 0.105882354, 0.105882354, 0.40784314)
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 texture = ExtResource("2_m6uer")
 
-[node name="Label" type="Label" parent="GameSlots/Slot1/TextureRect"]
+[node name="Label" type="Label" parent="GameSlots/Slot1/TextureRect" unique_id=203042696]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -151,7 +152,8 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Slot1"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameSlots/Slot1/TextureRect"]
+[node name="Slot1Stats" type="RichTextLabel" parent="GameSlots/Slot1/TextureRect" unique_id=338606434]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -168,7 +170,93 @@ Kingdoms Explored: 5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="GameSlots/Slot1/TextureRect"]
+[node name="LoadSlot1" type="TextureButton" parent="GameSlots/Slot1/TextureRect" unique_id=549774458]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.054
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 0.039993286
+
+[node name="Slot2" type="HBoxContainer" parent="GameSlots" unique_id=410539449]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameSlots/Slot2" unique_id=1007654141]
+self_modulate = Color(0.105882354, 0.105882354, 0.105882354, 0.40784314)
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+texture = ExtResource("2_m6uer")
+
+[node name="Label" type="Label" parent="GameSlots/Slot2/TextureRect" unique_id=10368787]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Slot2"
+
+[node name="Slot2Stats" type="RichTextLabel" parent="GameSlots/Slot2/TextureRect" unique_id=1910703799]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadSlot2" type="TextureButton" parent="GameSlots/Slot2/TextureRect" unique_id=248027473]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.054
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 0.039993286
+
+[node name="Slot3" type="HBoxContainer" parent="GameSlots" unique_id=491031051]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GameSlots/Slot3" unique_id=1159818219]
+self_modulate = Color(0.105882354, 0.105882354, 0.105882354, 0.40784314)
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+texture = ExtResource("2_m6uer")
+
+[node name="Label" type="Label" parent="GameSlots/Slot3/TextureRect" unique_id=1788048719]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Slot3"
+
+[node name="Slot3Stats" type="RichTextLabel" parent="GameSlots/Slot3/TextureRect" unique_id=1247303603]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadSlot3" type="TextureButton" parent="GameSlots/Slot3/TextureRect" unique_id=1098046743]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -182,4 +270,6 @@ offset_right = 0.039993286
 [connection signal="pressed" from="BtnContainer/Button3" to="." method="on_Exit"]
 [connection signal="item_selected" from="Settings/VBoxContainer/ResolutionSelect" to="." method="change_resolution"]
 [connection signal="pressed" from="Settings/CloseButton" to="." method="on_Settings"]
-[connection signal="pressed" from="GameSlots/Slot1/TextureRect/TextureButton" to="." method="load_game_slot"]
+[connection signal="pressed" from="GameSlots/Slot1/TextureRect/LoadSlot1" to="." method="load_game_slot_01"]
+[connection signal="pressed" from="GameSlots/Slot2/TextureRect/LoadSlot2" to="." method="load_game_slot"]
+[connection signal="pressed" from="GameSlots/Slot3/TextureRect/LoadSlot3" to="." method="load_game_slot"]

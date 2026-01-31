@@ -1,24 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0kt83yuc6fl"]
+[gd_scene format=3 uid="uid://b0kt83yuc6fl"]
 
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_bc0rb"]
 
-[node name="EnvSPRS" type="Node3D"]
+[node name="EnvSPRS" type="Node3D" unique_id=619778185]
 
-[node name="TreeSPR" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+[node name="SideLeftSPR" type="Sprite3D" parent="." unique_id=1871394641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -1)
 axis = 0
 texture = ExtResource("1_bc0rb")
 
-[node name="TreeSPR2" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+[node name="SideRightSPR" type="Sprite3D" parent="." unique_id=1250579413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1)
 axis = 0
 texture = ExtResource("1_bc0rb")
 
-[node name="GroundSPR" type="Sprite3D" parent="."]
+[node name="GroundSPR" type="Sprite3D" parent="." unique_id=833774736]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1)
 axis = 1
 texture = ExtResource("1_bc0rb")
 
-[node name="BGSPR" type="Sprite3D" parent="."]
+[node name="BGSPR" type="Sprite3D" parent="." unique_id=1827147968]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 texture = ExtResource("1_bc0rb")

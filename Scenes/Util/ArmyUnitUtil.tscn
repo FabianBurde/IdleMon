@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhooyin4yi0ui"]
+[gd_scene format=3 uid="uid://dhooyin4yi0ui"]
 
 [ext_resource type="Script" uid="uid://dfctjtmdgh0rl" path="res://Scripts/Util/army_unit_util.gd" id="1_7nvu4"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_h7jpo"]
@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://cfw7cstvqwgp4" path="res://Data/Units/meele_unit_01.tres" id="2_lpgia"]
 [ext_resource type="Texture2D" uid="uid://b8fw5g23qo5nb" path="res://Assets/Util/Start_Progress.png" id="5_jipwb"]
 
-[node name="UnitContainer" type="MarginContainer"]
+[node name="UnitContainer" type="MarginContainer" unique_id=112225414]
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = -1
 anchor_right = 0.03287501
@@ -22,13 +22,13 @@ script = ExtResource("1_7nvu4")
 army_unit = ExtResource("2_lpgia")
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite" type="TextureRect" parent="."]
+[node name="Sprite" type="TextureRect" parent="." unique_id=369749503]
 custom_minimum_size = Vector2(34, 36)
 layout_mode = 2
 texture = ExtResource("1_h7jpo")
 expand_mode = 2
 
-[node name="StarProgress" type="TextureProgressBar" parent="Sprite"]
+[node name="StarProgress" type="TextureProgressBar" parent="Sprite" unique_id=1034460159]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -42,9 +42,17 @@ value = 1.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_jipwb")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="ATKTimeLBL" type="Label" parent="Sprite" unique_id=1181104241]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.1110001
+anchor_bottom = 0.63900006
+offset_right = 0.0039978027
+offset_bottom = -0.0040016174
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=2029337514]
 wait_time = 5.0
-autostart = true
+one_shot = true
 
 [connection signal="mouse_entered" from="." to="." method="unit_hovered"]
 [connection signal="mouse_exited" from="." to="." method="unit_unhovered"]

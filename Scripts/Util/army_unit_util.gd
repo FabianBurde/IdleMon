@@ -1,9 +1,10 @@
 class_name UnitContainer
 extends MarginContainer
 
-@onready var star_progress:TextureProgressBar = $TextureRect/StarProgress
+@onready var star_progress:TextureProgressBar = $Sprite/StarProgress
 @onready var spr = $Sprite
 @onready var attack_timer = $AttackTimer
+@onready var time_lbl = $Sprite/ATKTimeLBL
 @export var army_unit:UnitRes
 var star_value:int = 1
 var is_selected:bool = false
@@ -17,7 +18,7 @@ func _ready() -> void:
 	SignalBus.enemy_dead.connect(stop_attack_timer)
 	SignalBus.enemy_spawned.connect(start_attack_timer)
 	army_unit = UnitRes.new()
-	attack_timer.wait_time = floorf(max(1.0, 5.0 - (0.1 * army_unit.speed)))
+	self.attack_timer.wait_time = 7.0 - (0.1 * army_unit.speed)
 	spawn_tween = create_tween()
 	#attack_tween = create_tween()
 	spawn_tween.tween_property(self, "modulate", Color.CORAL, 0.01).set_trans(Tween.TRANS_SINE)
@@ -32,6 +33,9 @@ func _ready() -> void:
 		army_unit.magic_dmg,
 		army_unit.speed
 	]
+	if LevelManager.active_enemy:
+		start_attack_timer()
+
 
 func stop_attack_timer():
 	attack_timer.stop()
@@ -39,28 +43,30 @@ func stop_attack_timer():
 	modulate = Color.WHITE
 
 func start_attack_timer():
-	attack_timer.wait_time = floorf(max(1.0, 5.0 - (0.1 * army_unit.speed)))
+	#attack_timer.wait_time = floorf(max(1.0, 5.0 - (0.1 * army_unit.speed)))
 	attack_timer.start()
 
 func attack_timeout():
-	print( self, " attacks!" )
-	
 	if attack_tween:
 		attack_tween.kill()
 	attack_tween = create_tween()
-	print(attack_tween)
 		#attack_tween = create_tween()
+	if ResourceManager.debug_mode != ResourceManager.DebugModes.OFF:
+		print( self, " attacks!" )
+		print(attack_tween)
 	attack_tween.tween_property(spr, "modulate", Color.RED, 0.2)
 	attack_tween.tween_property(spr, "position", Vector2(5, -25), 0.2)
-	attack_tween.tween_property(spr, "position", Vector2(2, 0), 0.4)
+	attack_tween.tween_property(spr, "position", Vector2(2, 0), 0.2)
 	attack_tween.tween_property(spr, "modulate", Color.WHITE, 0.2)
 	await attack_tween.finished
 	SignalBus.unit_attack.emit(0.1 * army_unit.phys_dmg)
+	if LevelManager.active_enemy:
+		start_attack_timer()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	time_lbl.text = "%.1f s" % (attack_timer.time_left)
 
 
 func unit_hovered():

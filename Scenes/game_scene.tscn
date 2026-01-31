@@ -1,35 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6kgv6t2es18u"]
+[gd_scene format=3 uid="uid://b6kgv6t2es18u"]
 
 [ext_resource type="Script" uid="uid://dkrq4bkd5nde1" path="res://Scenes/game_scene.gd" id="1_b6fju"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_x87qo"]
 [ext_resource type="PackedScene" uid="uid://b0kt83yuc6fl" path="res://Scenes/env_sprs.tscn" id="2_fiftr"]
 
-[node name="GameScene" type="Node3D"]
+[node name="GameScene" type="Node3D" unique_id=1099018625]
 script = ExtResource("1_b6fju")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1299368294]
 
-[node name="EnvSPRS" parent="." instance=ExtResource("2_fiftr")]
+[node name="EnvSPRS" parent="." unique_id=1844655036 instance=ExtResource("2_fiftr")]
 
-[node name="TreeSPR3" type="Sprite3D" parent="."]
+[node name="TreeSPR3" type="Sprite3D" parent="." unique_id=377206838]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
 visible = false
 axis = 0
 texture = ExtResource("1_x87qo")
 
-[node name="TreeSPR4" type="Sprite3D" parent="."]
+[node name="TreeSPR4" type="Sprite3D" parent="." unique_id=1703324872]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 visible = false
 axis = 0
 texture = ExtResource("1_x87qo")
 
-[node name="TreeSPR5" type="Sprite3D" parent="."]
+[node name="TreeSPR5" type="Sprite3D" parent="." unique_id=180873415]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -6)
 visible = false
 axis = 0
 texture = ExtResource("1_x87qo")
 
-[node name="TreeSPR6" type="Sprite3D" parent="."]
+[node name="TreeSPR6" type="Sprite3D" parent="." unique_id=1693272242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
 visible = false
 axis = 0

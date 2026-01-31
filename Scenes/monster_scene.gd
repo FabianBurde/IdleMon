@@ -10,22 +10,24 @@ var current_health
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalBus.enemy_spawned.emit()
 	current_health = enemy_resource.health
 	if enemy_resource:
 		mon_spr.texture = enemy_resource.enemy_tex
 		name_label.text = enemy_resource.enemy_name
+	SignalBus.enemy_spawned.emit()
+	LevelManager.active_enemy = self
 
 func take_damage(val) -> void:
 	current_health -= val
 	if current_health <= 0:
-		SignalBus.enemy_dead.emit()
+		#SignalBus.enemy_dead.emit()
 		print("Enemy Dead")
 		die()
 
 func die()-> void:
 	ResourceManager.add_gold(enemy_resource.gold_reward)
 	ResourceManager.add_exp(enemy_resource.exp_reward)
+	LevelManager.enemies_killed += 1
 	self.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
