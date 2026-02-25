@@ -1,20 +1,14 @@
 [gd_resource type="Resource" script_class="MonsterRes" format=3 uid="uid://cghnysrumryqh"]
 
+[ext_resource type="Texture2D" uid="uid://dllvp6y1s1aq3" path="res://Assets/Textures/Enemies/Bunny_01.png" id="1_jgepf"]
 [ext_resource type="Script" uid="uid://de3ufjp505n66" path="res://Data/monster.gd" id="1_w5bmn"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_w5bmn"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6brb"]
-width = 64
-height = 64
-noise = SubResource("FastNoiseLite_w5bmn")
 
 [resource]
 script = ExtResource("1_w5bmn")
 health = 15.0
 attack = 5.0
 attack_rate = 1.0
-enemy_tex = SubResource("NoiseTexture2D_s6brb")
+enemy_tex = ExtResource("1_jgepf")
 enemy_name = "Bunny"
 gold_reward = 1
 exp_reward = 1

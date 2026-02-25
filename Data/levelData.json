@@ -1,25 +1,92 @@
 { "levels": [
-    {
-        "level_id": 1,
-        "level_name": "Forest Zone",
-        "difficulty": "Easy",
-        "enemy_resource": "res://Data/enemies/monster_01.tres",
-        "enemy_amount": 15,
-        "boss_resource": "res://Data/enemies/boss_01.tres",
-        "background_music": "res://Audio/forest_theme.ogg"
-    },
-    {
-        "level_id": 2,
-        "level_name": "Cave of Shadows",
-        "difficulty": "Medium",
-        "enemy_amount": 10,
-        "background_music": "res://Audio/cave_theme.ogg"
-    },
-    {
-        "level_id": 3,
-        "level_name": "Desert of Despair",
-        "difficulty": "Hard",
-        "enemy_amount": 15,
-        "background_music": "res://Audio/desert_theme.ogg"
-    }
+	{
+		"level_id": 1,
+		"level_name": "Forest Zone",
+		"difficulty": "Easy",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 15,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/forest_theme.ogg"
+	},
+	{
+		"level_id": 2,
+		"level_name": "Cave of Shadows",
+		"difficulty": "Medium",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 25,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/cave_theme.ogg"
+	},
+	{
+		"level_id": 3,
+		"level_name": "Desert of Despair",
+		"difficulty": "Hard",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 35,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/desert_theme.ogg"
+	},
+	{
+		"level_id": 4,
+		"level_name": "Icebound Tundra",
+		"difficulty": "Extreme",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 40,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/ice_theme.ogg"
+	},
+	{
+		"level_id": 5,
+		"level_name": "Volcanic Abyss",
+		"difficulty": "Nightmare",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 50,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/volcano_theme.ogg"
+	},
+	{
+		"level_id": 6,
+		"level_name": "Sky Fortress",
+		"difficulty": "Insane",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 60,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/sky_theme.ogg"
+	},
+	{
+		"level_id": 7,
+		"level_name": "Shadow Realm",
+		"difficulty": "Hellish",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 75,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/shadow_theme.ogg"
+	},
+	{
+		"level_id": 8,
+		"level_name": "Eternal Citadel",
+		"difficulty": "Apocalyptic",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 100,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/citadel_theme.ogg"
+	},
+	{
+		"level_id": 9,
+		"level_name": "Final Bastion",
+		"difficulty": "Legendary",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 150,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/final_theme.ogg"
+	},
+	{
+		"level_id": 10,
+		"level_name": "Infinite Abyss",
+		"difficulty": "Mythical",
+		"enemy_resource": "res://Data/enemies/monster_01.tres",
+		"enemy_amount": 200,
+		"boss_resource": "res://Data/enemies/boss_01.tres",
+		"background_music": "res://Audio/infinite_theme.ogg"
+	}
 ]}
