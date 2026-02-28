@@ -97,7 +97,36 @@ func load_game_slot_01():
 		ResourceManager.new_game = true
 		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot1.tres")
 		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
-	
+
+func load_game_slot_02():
+	### For saves in Savefiles show slots ###
+	print("test")
+	if ResourceLoader.exists("user://SaveSlot2.tres"):
+		ResourceManager.active_save_file_path = "user://SaveSlot2.tres"
+		ResourceManager.active_save_game = ResourceLoader.load("user://SaveSlot2.tres","",ResourceLoader.CACHE_MODE_IGNORE)
+		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+		ResourceManager.load_savefile()
+	else:
+		ResourceManager.active_save_game = SaveGame.new()
+		ResourceManager.active_save_file_path = "user://SaveSlot2.tres"
+		ResourceManager.new_game = true
+		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot2.tres")
+		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+
+func load_game_slot_03():
+	### For saves in Savefiles show slots ###
+	print("test")
+	if ResourceLoader.exists("user://SaveSlot3.tres"):
+		ResourceManager.active_save_file_path = "user://SaveSlot3.tres"
+		ResourceManager.active_save_game = ResourceLoader.load("user://SaveSlot3.tres","",ResourceLoader.CACHE_MODE_IGNORE)
+		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+		ResourceManager.load_savefile()
+	else:
+		ResourceManager.active_save_game = SaveGame.new()
+		ResourceManager.active_save_file_path = "user://SaveSlot3.tres"
+		ResourceManager.new_game = true
+		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
+		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot3.tres")
 
 func on_Settings() -> void:
 	# Show Settings Menu
