@@ -7,7 +7,7 @@ extends Node3D
 var monster_scene = preload("res://Scenes/monster_scene.tscn")
 var env_scene = preload("res://Scenes/env_sprs.tscn")
 var current_monster:Node3D = null
-var z_step = 2.0
+var z_step = 2.3
 var current_z
 
 
@@ -22,21 +22,29 @@ func spawn_monster() -> void:
 	#if current_monster:
 	#	current_monster.queue_free()
 	current_monster = monster_scene.instantiate()
-	add_child(current_monster)
-	current_monster.position = Vector3(0,0,-1)
+	if LevelManager.enemies_in_level_killed >= LevelManager.level_data["levels"][LevelManager.current_level]["enemy_amount"]:
+		current_monster.enemy_resource = load(LevelManager.level_data["levels"][LevelManager.current_level]["boss_resource"])
+		current_monster.monster_type = current_monster.MONSTER_TYPES.boss
+		add_child(current_monster)
+		current_monster.position = Vector3(0,0,-1)
+	else:
+		current_monster.enemy_resource = load(LevelManager.level_data["levels"][LevelManager.current_level]["enemy_resource"])
+		current_monster.monster_type = current_monster.MONSTER_TYPES.normal
+		add_child(current_monster)
+		current_monster.position = Vector3(0,0,-1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_moving:
 		cam.position.z -= delta *0.4
+		#cam.fov +=  delta * 1.5
 		if cam.position.z <= -z_step:
 			start_stop_walk()
-			z_step = 2.0
 			#spawn_monster()
 			reset_scene()
 	if current_monster == null and not is_moving:
-		SignalBus.enemy_dead.emit()
+		#SignalBus.enemy_dead.emit()
 		start_stop_walk()
 		
 
@@ -47,6 +55,7 @@ func start_stop_walk() -> void:
 
 func reset_scene() -> void:
 	cam.position = Vector3(0,0,0)
-	z_step = 2.0
+	z_step = 2.3
+	#cam.fov = 90
 	spawn_monster()
 	is_moving = false

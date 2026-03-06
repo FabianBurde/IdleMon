@@ -12,6 +12,8 @@ var player_stats = {
 	"exp": 0,
 	"attack": 1,
 }
+var inventory_slots:int = 6
+var inventory_items: Array = []
 var save_timer: Timer
 var active_save_game: SaveGame = null
 var active_save_file_path: String = ""

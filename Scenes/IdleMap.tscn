@@ -4,9 +4,68 @@
 [ext_resource type="Script" uid="uid://c2v4ck6tq6gpr" path="res://Scripts/idle_map.gd" id="1_mxbe6"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_ww72c"]
 [ext_resource type="PackedScene" uid="uid://b6kgv6t2es18u" path="res://Scenes/game_scene.tscn" id="3_fu7im"]
+[ext_resource type="Shader" uid="uid://1uuigwsoagu5" path="res://Assets/Shaders/GodRay.gdshader" id="4_8esda"]
 [ext_resource type="Texture2D" uid="uid://b84nl6ua56o17" path="res://Assets/Btn/MenuButtonPressed.png" id="6_8esda"]
+[ext_resource type="Script" uid="uid://bis55tl43d3bv" path="res://Scripts/Util/merge_container.gd" id="6_nvpqu"]
+[ext_resource type="Texture2D" uid="uid://djx2dx336hxv4" path="res://Assets/Textures/DemoAssets/InventoryBG.png" id="8_obst2"]
+[ext_resource type="Script" uid="uid://qun40h3sb2go" path="res://Scripts/UI/inventory_grid.gd" id="9_obst2"]
 
-[node name="Control" type="Control" unique_id=421952589 node_paths=PackedStringArray("game_scene")]
+[sub_resource type="Gradient" id="Gradient_nvpqu"]
+offsets = PackedFloat32Array(0, 0.50666666, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.24, 0.24, 0.24, 0.5294118, 1, 1, 1, 0.07450981)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvpqu"]
+gradient = SubResource("Gradient_nvpqu")
+width = 146
+fill_from = Vector2(0, 0.5140187)
+fill_to = Vector2(1, 0.53271025)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8esda"]
+gradient = SubResource("Gradient_nvpqu")
+fill_from = Vector2(0.58878505, 0.014018691)
+fill_to = Vector2(0.5373832, 0.92523366)
+
+[sub_resource type="Gradient" id="Gradient_arf0q"]
+offsets = PackedFloat32Array(0, 0.9927536)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.13725491)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_obst2"]
+gradient = SubResource("Gradient_arf0q")
+fill_from = Vector2(0.6386139, 1)
+fill_to = Vector2(0.6386139, 0)
+
+[sub_resource type="Gradient" id="Gradient_8esda"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_arf0q"]
+gradient = SubResource("Gradient_8esda")
+fill_from = Vector2(0, 0.490099)
+fill_to = Vector2(1, 0.46534654)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_arf0q"]
+shader = ExtResource("4_8esda")
+shader_parameter/angle = -0.105
+shader_parameter/position = -0.075
+shader_parameter/spread = 0.3370000160075
+shader_parameter/cutoff = -0.917999996105
+shader_parameter/falloff = 0.88800004218
+shader_parameter/edge_fade = 0.6730000319675
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.286000013585
+shader_parameter/color = Color(1, 0.9019608, 0.6509804, 0.5411765)
+shader_parameter/hdr = false
+shader_parameter/seed = 234234.0
+
+[sub_resource type="Gradient" id="Gradient_obst2"]
+colors = PackedColorArray(0.2489303, 2.6321504e-07, 5.4147094e-08, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dvkq1"]
+gradient = SubResource("Gradient_obst2")
+fill_from = Vector2(0.5841584, 0.7673267)
+fill_to = Vector2(0.5792079, 0.980198)
+
+[node name="IdleMain" type="Control" unique_id=421952589 node_paths=PackedStringArray("game_scene")]
 layout_mode = 3
 anchor_right = 1.0003333
 anchor_bottom = 1.0003334
@@ -15,7 +74,7 @@ offset_bottom = -0.21606445
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mxbe6")
-game_scene = NodePath("MarginContainer/HBoxContainer2/VBoxContainer/Control/HBoxContainer/SubViewport/GameScene")
+game_scene = NodePath("MarginContainer/HBoxContainer2/VBoxContainer/UILower/SubViewContainer/SubViewport/GameScene")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1862449021]
@@ -25,95 +84,161 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.14044744, 0.14044744, 0.14044744, 1)
+color = Color(0.055999998, 0.055999998, 0.14, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1766631961]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.012
+anchor_right = 1.0120001
+anchor_bottom = 1.0
+offset_left = 13.824
+offset_right = -13.824097
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer" unique_id=13042062]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2" unique_id=193442636]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_nvpqu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2/TextureRect" unique_id=640369472]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer" unique_id=13042062]
+[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer" unique_id=791448233]
 layout_mode = 2
+title = "Units"
 
-[node name="VBButtons" type="VBoxContainer" parent="MarginContainer/HBoxContainer2" unique_id=328916085]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer" unique_id=334218028]
+custom_minimum_size = Vector2(54, 300)
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="LeftMenu" type="VBoxContainer" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer" unique_id=328916085]
 z_index = 1
 layout_mode = 2
 
-[node name="TextureButton" parent="MarginContainer/HBoxContainer2/VBButtons" unique_id=1691011351 instance=ExtResource("1_dfmsr")]
+[node name="TextureButton" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu" unique_id=1691011351 instance=ExtResource("1_dfmsr")]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer2/VBButtons" unique_id=1404453555]
+[node name="UnitBuyBtn" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu" unique_id=1261515048 instance=ExtResource("1_dfmsr")]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+unit_name = "Archer"
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu" unique_id=1031201117]
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu/TextureButton2" unique_id=420219401]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11000001
+anchor_top = 0.41000003
+anchor_right = 0.89000005
+anchor_bottom = 0.59000003
+offset_left = 31.48
+offset_top = 0.019996643
+offset_right = -31.480003
+offset_bottom = -0.020004272
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.09, 0.026100002, 0.026100002, 1)
+theme_override_colors/font_outline_color = Color(0.51, 0.51, 0.51, 1)
+theme_override_constants/outline_size = 4
+text = "OPEN MERGE"
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu" unique_id=1404453555]
 layout_mode = 2
 text = "SAVE"
 
-[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer2/VBButtons" unique_id=932949042]
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu" unique_id=932949042]
 layout_mode = 2
 text = "Load"
+
+[node name="FoldableContainer2" type="FoldableContainer" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer" unique_id=232437441]
+layout_mode = 2
+title = "Tech"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer2" unique_id=1963938231]
+layout_mode = 2
+
+[node name="UnitBuyBtn" parent="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer2/VBoxContainer" unique_id=461091323 instance=ExtResource("1_dfmsr")]
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2" unique_id=1273093553]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer" unique_id=1221518782]
+[node name="UIUpper" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer" unique_id=1221518782]
 self_modulate = Color(1, 1, 1, 0.31764707)
+custom_minimum_size = Vector2(999, 100)
 layout_mode = 2
-texture = ExtResource("1_ww72c")
+texture = SubResource("GradientTexture2D_8esda")
 
-[node name="GoldLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect" unique_id=1130951172]
+[node name="GoldLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer2/VBoxContainer/UIUpper" unique_id=1130951172]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.402
-anchor_right = 0.59800005
-anchor_bottom = 0.312
-offset_left = 0.2199707
-offset_right = -0.22009277
-offset_bottom = 0.063999176
+anchor_left = 0.24170172
+anchor_top = 0.53
+anchor_right = 0.40032795
+anchor_bottom = 0.9464025
+offset_left = 0.039978027
+offset_right = 0.5
+offset_bottom = 0.01599884
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "123123"
 scroll_active = false
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect" unique_id=2037048487]
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/UIUpper" unique_id=2037048487]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.028353535
-anchor_top = 0.031375002
-anchor_right = 0.13335356
-anchor_bottom = 0.38237503
+anchor_left = 0.021591585
+anchor_top = 0.050160002
+anchor_right = 0.21573575
+anchor_bottom = 0.40116006
 offset_left = -0.069999695
 offset_top = -0.01600027
 offset_right = -0.020019531
 offset_bottom = 0.05599594
+theme_override_constants/line_spacing = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ExpBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect" unique_id=1798750443]
+[node name="ExpBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer/UIUpper" unique_id=1798750443]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.6171875
-anchor_right = 0.28242424
-anchor_bottom = 0.99950004
+anchor_left = 0.018763576
+anchor_top = 0.75
+anchor_right = 0.21656138
+anchor_bottom = 0.89793754
 offset_right = 0.3999977
 offset_bottom = 0.063999176
 rounded = true
 nine_patch_stretch = true
-texture_progress = ExtResource("1_ww72c")
+texture_under = SubResource("GradientTexture2D_obst2")
+texture_progress = SubResource("GradientTexture2D_arf0q")
 tint_progress = Color(0.827451, 0.7176471, 0.12941177, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="LevelProgressLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/TextureRect" unique_id=321789400]
+[node name="LevelProgressLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/UIUpper" unique_id=321789400]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -130,29 +255,58 @@ text = "1/10"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer" unique_id=363928694]
+[node name="LevelNameLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/UIUpper" unique_id=1058305166]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39200002
+anchor_top = 0.31993753
+anchor_right = 0.60800004
+anchor_bottom = 0.6719376
+offset_left = -0.08001709
+offset_top = 0.04799652
+offset_right = 0.079956055
+offset_bottom = -0.008010864
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="UILower" type="Control" parent="MarginContainer/HBoxContainer2/VBoxContainer" unique_id=363928694]
 custom_minimum_size = Vector2(33, 333)
 layout_mode = 2
 mouse_filter = 1
 mouse_force_pass_scroll_events = false
 
-[node name="HBoxContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control" unique_id=1967494090]
+[node name="GodRayRect" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=432263750]
+z_index = 3
+material = SubResource("ShaderMaterial_arf0q")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.4380001
+anchor_bottom = 1.5170001
 offset_top = 4.0
-offset_bottom = 0.14596558
+offset_right = 4.5
+offset_bottom = -0.16104126
+
+[node name="SubViewContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=1967494090]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.6190001
+offset_top = 4.0
+offset_bottom = -0.12701416
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/HBoxContainer" unique_id=671503995]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/SubViewContainer" unique_id=671503995]
 handle_input_locally = false
-size = Vector2i(990, 475)
+size = Vector2i(999, 535)
 render_target_update_mode = 4
 
-[node name="GameScene" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/HBoxContainer/SubViewport" unique_id=2062516155 instance=ExtResource("3_fu7im")]
+[node name="GameScene" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/SubViewContainer/SubViewport" unique_id=2062516155 instance=ExtResource("3_fu7im")]
 
-[node name="MonsterBtn" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control" unique_id=1669702443]
+[node name="MonsterBtn" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=1669702443]
+unique_name_in_owner = true
 z_index = 7
 custom_minimum_size = Vector2(333, 333)
 layout_mode = 1
@@ -165,8 +319,9 @@ offset_right = 0.35998535
 mouse_default_cursor_shape = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="MonsterHealthBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control" unique_id=694310336]
+[node name="MonsterHealthBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=694310336]
 unique_name_in_owner = true
+z_index = 4
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3648485
@@ -177,13 +332,14 @@ offset_left = -0.2000122
 offset_right = 0.19995117
 offset_bottom = 0.0399971
 grow_horizontal = 2
+max_value = 9999.0
 value = 100.0
 nine_patch_stretch = true
-texture_under = ExtResource("1_ww72c")
+texture_under = SubResource("GradientTexture2D_dvkq1")
 texture_progress = ExtResource("6_8esda")
 metadata/_edit_use_anchors_ = true
 
-[node name="MonsterHealthLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterHealthBar" unique_id=1331757144]
+[node name="MonsterHealthLabel" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MonsterHealthBar" unique_id=1331757144]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -198,19 +354,204 @@ offset_bottom = -0.014001846
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ArmyContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/Control" unique_id=1099403475]
+[node name="MergeContainer" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=699350831 node_paths=PackedStringArray("slot1_container", "slot2_container")]
 unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(444, 33)
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 1.1531532
+anchor_left = 0.22600001
+anchor_top = 0.44400004
+anchor_right = 0.776
+anchor_bottom = 0.87700003
+offset_left = 0.2599945
+offset_top = 0.147995
+offset_right = -0.24005127
+offset_bottom = -0.041015625
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25882354, 0.36078432, 1, 1)
+script = ExtResource("6_nvpqu")
+slot1_container = NodePath("HBoxContainer/Slot1BTN")
+slot2_container = NodePath("HBoxContainer/Slot2BTN")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer" unique_id=1190566768]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.029000001
+anchor_top = 0.095000006
+anchor_right = 0.9710001
+anchor_bottom = 0.94600004
+offset_left = 184.84598
+offset_top = 5.9900007
+offset_right = -184.8461
+offset_bottom = -11.363235
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot1BTN" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer/HBoxContainer" unique_id=921851293]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(126, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_ww72c")
+
+[node name="MergeBTN" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer/HBoxContainer" unique_id=1771353996]
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+
+[node name="Slot2BTN" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer/HBoxContainer" unique_id=403459972]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(126, 0)
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer" unique_id=10781027]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38200003
+anchor_right = 0.61800003
+anchor_bottom = 0.14600001
+offset_left = -0.1800232
+offset_right = 0.17999268
+offset_bottom = -0.0680027
+grow_horizontal = 2
+text = "Select 2 Units and press Merge"
+
+[node name="ArmyBG" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=1126631580]
+custom_minimum_size = Vector2(555, 22)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0005005005
+anchor_top = 1.4322884
+anchor_right = 1.0005006
+anchor_bottom = 1.6216216
+offset_top = 0.047973633
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.10747976, 0.10747973, 0.10747973, 0.12156863)
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG" unique_id=1227414320]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.02
 anchor_right = 1.0
-anchor_bottom = 1.2848469
-offset_bottom = 0.14596558
+anchor_bottom = 1.0
+offset_bottom = -7.0000076
 grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBButtons/TextureButton" to="." method="buy_unit_01"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBButtons/Button" to="." method="manual_save"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBButtons/Button2" to="." method="manual_load"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/Control/MonsterBtn" to="." method="player_attack"]
+[node name="ArmySlots" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG/CenterContainer" unique_id=1048170159]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG/CenterContainer/ArmySlots" unique_id=214613948]
+custom_minimum_size = Vector2(36, 128)
+layout_mode = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG/CenterContainer/ArmySlots" unique_id=319648712]
+custom_minimum_size = Vector2(36, 128)
+layout_mode = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG/CenterContainer/ArmySlots" unique_id=244297997]
+custom_minimum_size = Vector2(36, 128)
+layout_mode = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="ColorRect4" type="ColorRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG/CenterContainer/ArmySlots" unique_id=1551992960]
+custom_minimum_size = Vector2(36, 128)
+layout_mode = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="ArmyContainer" type="GridContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/ArmyBG/CenterContainer" unique_id=1543865640]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = -45
+columns = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="MiniMenu" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=1607248197]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.008508508
+anchor_top = 0.045045044
+anchor_right = 0.1785085
+anchor_bottom = 0.16504505
+offset_right = -0.33000183
+offset_bottom = 0.0399971
+metadata/_edit_use_anchors_ = true
+
+[node name="InventoryBTN" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MiniMenu" unique_id=236893959]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MiniMenu" unique_id=875834334]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SettingsBTN" type="TextureButton" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MiniMenu" unique_id=1350030551]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_ww72c")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Inventory" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower" unique_id=511379880]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020944923
+anchor_top = -6.1640854
+anchor_right = 0.258945
+anchor_bottom = -5.3772774
+offset_left = 0.5759907
+offset_top = 2152.6404
+offset_right = 0.81396484
+offset_bottom = 2152.6333
+texture = ExtResource("8_obst2")
+expand_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/Inventory" unique_id=1263820190]
+custom_minimum_size = Vector2(240, 262)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.99998474
+offset_right = 0.99998474
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="InventoryGrid" type="GridContainer" parent="MarginContainer/HBoxContainer2/VBoxContainer/UILower/Inventory/MarginContainer" unique_id=1975049617]
+layout_mode = 2
+theme_override_constants/h_separation = -2
+theme_override_constants/v_separation = 1
+columns = 6
+script = ExtResource("9_obst2")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu/TextureButton" to="." method="buy_unit_01"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu/TextureButton2" to="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer" method="hide_show"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu/Button" to="." method="manual_save"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/TextureRect/VBoxContainer/FoldableContainer/ScrollContainer/LeftMenu/Button2" to="." method="manual_load"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MonsterBtn" to="." method="player_attack"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer/HBoxContainer/MergeBTN" to="MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer" method="merge_units"]

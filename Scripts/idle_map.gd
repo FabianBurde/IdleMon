@@ -29,6 +29,7 @@ func _ready() -> void:
 	SignalBus.unit_merged.connect(add_merged_unit)
 	ResourceManager.load_savefile()
 	update_level_name()
+	UnitManager.army_container = army_container
 
 	
 

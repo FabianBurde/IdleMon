@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bkngtxilcvtk5"]
+
+[ext_resource type="Script" uid="uid://cvtwvifhtcrdx" path="res://Scripts/UI/inventory_item.gd" id="1_asmsf"]
+[ext_resource type="Texture2D" uid="uid://c2dc6kivw8tie" path="res://Assets/Textures/DemoAssets/Icon01.png" id="2_s8oo2"]
+[ext_resource type="Texture2D" uid="uid://cqkmillu1i2dm" path="res://Assets/Textures/DemoAssets/crosshair_01DEMODELETE.png" id="3_asmsf"]
+
+[node name="InventoryItem" type="MarginContainer" unique_id=101870591]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.062000003
+offset_right = -0.3199997
+offset_bottom = -0.1760025
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_asmsf")
+
+[node name="SpriteBorder" type="TextureRect" parent="." unique_id=1986307737]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_s8oo2")
+expand_mode = 1
+
+[node name="SpriteItem" type="TextureRect" parent="." unique_id=155518163]
+layout_mode = 2
+texture = ExtResource("3_asmsf")
+expand_mode = 1

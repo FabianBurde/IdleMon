@@ -4,10 +4,51 @@
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_x87qo"]
 [ext_resource type="PackedScene" uid="uid://b0kt83yuc6fl" path="res://Scenes/env_sprs.tscn" id="2_fiftr"]
 
+[sub_resource type="Gradient" id="Gradient_6h5vk"]
+offsets = PackedFloat32Array(0, 0.8947368)
+colors = PackedColorArray(0.07680001, 0.16416003, 0.48, 1, 0.2484, 0.34408003, 0.69, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fiftr"]
+gradient = SubResource("Gradient_6h5vk")
+width = 128
+height = 128
+fill_from = Vector2(0.861244, 0.8229665)
+fill_to = Vector2(0.04477612, 0.14179105)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1ixah"]
+panorama = SubResource("GradientTexture2D_fiftr")
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_rgj8m"]
+sky_material = SubResource("PanoramaSkyMaterial_1ixah")
+
+[sub_resource type="Environment" id="Environment_6h5vk"]
+background_mode = 2
+sky = SubResource("Sky_rgj8m")
+ambient_light_source = 3
+ambient_light_color = Color(0.6860594, 0.5762651, 0.17431629, 0.8509804)
+reflected_light_source = 2
+glow_normalized = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0.017084444, 0.034832243, 0.119793065, 1)
+volumetric_fog_emission = Color(0.13319641, 0.13319641, 0.13319635, 1)
+volumetric_fog_emission_energy = 12.0
+volumetric_fog_detail_spread = 1.0717735
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6h5vk"]
+albedo_color = Color(0.0253638, 0.0253638, 0.025363795, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fiftr"]
+material = SubResource("StandardMaterial3D_6h5vk")
+radius = 0.2
+
 [node name="GameScene" type="Node3D" unique_id=1099018625]
 script = ExtResource("1_b6fju")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1299368294]
+transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, 0, 0)
+fov = 90.0
 
 [node name="EnvSPRS" parent="." unique_id=1844655036 instance=ExtResource("2_fiftr")]
 
@@ -34,3 +75,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
 visible = false
 axis = 0
 texture = ExtResource("1_x87qo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=718634636]
+environment = SubResource("Environment_6h5vk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=341670904]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.033445716, 0, -3)
+mesh = SubResource("SphereMesh_fiftr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1095474067]
+transform = Transform3D(-0.21615595, -0.9658849, -0.14262871, 0.97591525, -0.21814291, -0.0017453283, -0.029427659, -0.1395708, 0.9897747, 0, 10.523432, 0)
+light_color = Color(0.9019608, 0.91764706, 0.23529412, 1)
+light_energy = 1.5

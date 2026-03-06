@@ -3,6 +3,8 @@ class_name UnitRes
 
 @export var unit_name:String
 @export var unit_tex:Texture2D
+var unit_id:int
+var unit_slot_id:int
 var health:float
 var phys_dmg:float
 var magic_dmg:float
@@ -22,12 +24,25 @@ var star_value:int
 
 
 func _set_random_stats(min_stat:int, max_stat:int) -> void:
-	randomize()
-	phys_dmg = randi_range(min_stat, max_stat)
-	magic_dmg = randi_range(min_stat, max_stat)
-	phys_def = randi_range(min_stat, max_stat)
-	magic_def = randi_range(min_stat, max_stat)
-	speed = randi_range(min_stat, max_stat)
+	
+	var point_distribution = [0, 0, 0, 0, 0]
+	var remaining_points = base_stat_points
+	while remaining_points > 0:
+		randomize()
+		var stat_index = randi_range(0, 4)
+		if point_distribution[stat_index] < max_stat - min_stat:
+			point_distribution[stat_index] += 1
+			remaining_points -= 1
+	phys_dmg = min_stat + point_distribution[0]
+	magic_dmg = min_stat + point_distribution[1]
+	phys_def = min_stat + point_distribution[2]
+	magic_def = min_stat + point_distribution[3]
+	speed = min_stat + point_distribution[4]
+	#phys_dmg = randi_range(min_stat, max_stat)
+	#magic_dmg = randi_range(min_stat, max_stat)
+	#phys_def = randi_range(min_stat, max_stat)
+	#magic_def = randi_range(min_stat, max_stat)
+	#speed = randi_range(min_stat, max_stat)
 	print("Generated Unit Stats: ")
 	print( phys_dmg, " ", magic_dmg, " ", phys_def, " ", magic_def, " ", speed)
 

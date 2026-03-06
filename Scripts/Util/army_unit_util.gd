@@ -7,6 +7,8 @@ extends Moveable
 @onready var time_lbl = $Sprite/ATKTimeLBL
 @export var army_unit:UnitRes
 
+## TODO Implement viewable unit Equipment Window and item equipping. ##
+@export var equipped_item: ItemRes
 
 var merge_container
 var merge_slot1 
@@ -46,7 +48,14 @@ func _ready() -> void:
 	spawn_tween.tween_property(self, "modulate", Color.WHITE, 0.2).set_trans(Tween.TRANS_SINE)
 	print(army_unit)
 	star_progress.value = army_unit.star_value
-	tooltip_text = "ID: %d\n Name: %s \nHealth: %d\nPAttack: %d\nMAttack: %d\n Speed: %d \n Stars: %d" % [
+	update_tooltip()
+	#spawn_position = self.global_position
+	scale_tween(1.6,Tween.TRANS_ELASTIC)
+	if LevelManager.active_enemy:
+		start_attack_timer()
+
+func update_tooltip():
+		tooltip_text = "ID: %d\n Name: %s \nHealth: %d\nPAttack: %d\nMAttack: %d\n Speed: %d \n Stars: %d" % [
 		army_unit.unit_id,
 		army_unit.unit_name,
 		army_unit.health,
@@ -55,9 +64,10 @@ func _ready() -> void:
 		army_unit.speed,
 		army_unit.star_value
 	]
-	#spawn_position = self.global_position
-	if LevelManager.active_enemy:
-		start_attack_timer()
+
+func scale_tween(time: float,trans: Tween.TransitionType) -> void:
+	self.scale = Vector2(0.2, 0.2)
+	self.create_tween().tween_property(self, "scale", Vector2(1, 1), time).set_trans(trans).set_ease(Tween.EASE_OUT)
 
 
 func stop_attack_timer():
@@ -94,7 +104,7 @@ func attack_timeout():
 
 func has_drop_target() -> bool:
 	var mouse_pos = get_global_mouse_position()
-	var parent = get_parent()
+	var parent = get_parent().get_parent()
 	merge_slot1 = UnitManager.merge_btn1
 	merge_slot2 = UnitManager.merge_btn2
 	merge_container = UnitManager.merge_container
@@ -114,11 +124,11 @@ func has_drop_target() -> bool:
 		swap_target = merge_slot2
 		return true
 	for child in parent.get_children():
-		if child is UnitContainer and child != self or child:
+		if child.get_child(0) is UnitContainer and child != self:
 			var child_rect = Rect2(child.global_position, child.custom_minimum_size)
 			if child_rect.has_point(mouse_pos):
 				InputManager.rects_to_draw.append(child_rect)
-				swap_target = child
+				swap_target = child.get_child(0)
 				return true
 	#var result = space_state.intersect_point(get_global_mouse_position(), 1, [], 2147483647, true, true)
 	#return result.size() > 0
@@ -130,6 +140,7 @@ func stop_drag() -> void:
 	var drop_target = has_drop_target()
 	if drop_target and swap_target is UnitContainer and swap_target != self:
 		print("found target")
+		print(self.global_position)
 		print(swap_target)
 		swap_unit(swap_target)
 		swap_target = null
@@ -173,11 +184,40 @@ func unit_unhovered():
 	self.modulate = Color(1, 1, 1, 1)
 
 func swap_unit(other_unit:UnitContainer):
-	var temp_position = self.spawn_position
-	print(other_unit.global_position)
-	print(temp_position)
-	self.position = other_unit.spawn_position
-	other_unit.global_position = temp_position
+	print("Swapping %s with %s" % [self.army_unit.unit_name, other_unit.army_unit.unit_name])
+	var other_parent = other_unit.get_parent()
+	var other_slot_id = other_unit.army_unit.unit_slot_id
+	var self_slot_id = army_unit.unit_slot_id
+	var self_parent = self.get_parent()
+	self.army_unit.unit_slot_id = other_slot_id
+	other_unit.army_unit.unit_slot_id = self_slot_id
+	#var temp_position = other_unit.global_position
+	#other_unit.global_position = self.drag_start_position
+	#self.global_position = temp_position
+	other_parent.remove_child(other_unit)
+	self_parent.remove_child(self)
+	other_parent.add_child(self)
+	self_parent.add_child(other_unit)
+	#var temp_position = self.spawn_position
+	#print(other_unit.global_position)
+	#print(temp_position)
+	#self.position = other_unit.spawn_position
+	#other_unit.global_position = temp_position
 
 func unit_clicked():
 	print("Unit Clicked: %s" % army_unit.unit_name)
+
+func consume_item(item: ItemRes):
+	for key in item.consume_effect.keys():
+		if key == "health":
+			army_unit.health += item.consume_effect[key]
+		elif key == "phys_dmg":
+			army_unit.phys_dmg += item.consume_effect[key]
+		elif key == "magic_dmg":
+			army_unit.magic_dmg += item.consume_effect[key]
+		elif key == "phys_def":
+			army_unit.phys_def += item.consume_effect[key]
+		elif key == "magic_def":
+			army_unit.magic_def += item.consume_effect[key]
+		elif key == "speed":
+			army_unit.speed += item.consume_effect[key]

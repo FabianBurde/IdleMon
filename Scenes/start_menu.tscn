@@ -271,5 +271,5 @@ offset_right = 0.039993286
 [connection signal="item_selected" from="Settings/VBoxContainer/ResolutionSelect" to="." method="change_resolution"]
 [connection signal="pressed" from="Settings/CloseButton" to="." method="on_Settings"]
 [connection signal="pressed" from="GameSlots/Slot1/TextureRect/LoadSlot1" to="." method="load_game_slot_01"]
-[connection signal="pressed" from="GameSlots/Slot2/TextureRect/LoadSlot2" to="." method="load_game_slot"]
-[connection signal="pressed" from="GameSlots/Slot3/TextureRect/LoadSlot3" to="." method="load_game_slot"]
+[connection signal="pressed" from="GameSlots/Slot2/TextureRect/LoadSlot2" to="." method="load_game_slot_02"]
+[connection signal="pressed" from="GameSlots/Slot3/TextureRect/LoadSlot3" to="." method="load_game_slot_03"]

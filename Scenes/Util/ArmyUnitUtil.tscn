@@ -1,16 +1,31 @@
 [gd_scene format=3 uid="uid://dhooyin4yi0ui"]
 
 [ext_resource type="Script" uid="uid://dfctjtmdgh0rl" path="res://Scripts/Util/army_unit_util.gd" id="1_7nvu4"]
-[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_h7jpo"]
 [ext_resource type="Theme" uid="uid://dsa37ceqer2sb" path="res://Assets/MainTheme.tres" id="1_w1cea"]
 [ext_resource type="Resource" uid="uid://cfw7cstvqwgp4" path="res://Data/Units/meele_unit_01.tres" id="2_lpgia"]
+[ext_resource type="Texture2D" uid="uid://bc70ueurxt0e7" path="res://Assets/Textures/DemoAssets/Unit_01_Demo.png" id="4_jipwb"]
 [ext_resource type="Texture2D" uid="uid://b8fw5g23qo5nb" path="res://Assets/Util/Start_Progress.png" id="5_jipwb"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jipwb"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pxmsr"]
+width = 38
+height = 8
+noise = SubResource("FastNoiseLite_jipwb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pxmsr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_njmff"]
+width = 38
+height = 8
+noise = SubResource("FastNoiseLite_pxmsr")
+
 [node name="UnitContainer" type="MarginContainer" unique_id=112225414]
+z_index = 1
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = -1
 anchor_right = 0.03287501
-anchor_bottom = 0.062197555
+anchor_bottom = 0.20417286
 offset_right = 2.1279907
 offset_bottom = -0.3040161
 theme = ExtResource("1_w1cea")
@@ -23,32 +38,54 @@ army_unit = ExtResource("2_lpgia")
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=369749503]
-custom_minimum_size = Vector2(34, 36)
+z_index = 2
+custom_minimum_size = Vector2(32, 100)
 layout_mode = 2
-texture = ExtResource("1_h7jpo")
-expand_mode = 2
+texture = ExtResource("4_jipwb")
+expand_mode = 1
 
 [node name="StarProgress" type="TextureProgressBar" parent="Sprite" unique_id=1034460159]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.30600002
-offset_bottom = -0.016000748
+anchor_left = 0.027777778
+anchor_top = 0.42931253
+anchor_right = 1.0557778
+anchor_bottom = 0.53931254
+offset_top = 0.04799652
+offset_right = -0.00799942
+offset_bottom = -0.03200531
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 5.0
 value = 1.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_jipwb")
+metadata/_edit_use_anchors_ = true
 
 [node name="ATKTimeLBL" type="Label" parent="Sprite" unique_id=1181104241]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.36100003
 anchor_right = 1.1110001
-anchor_bottom = 0.63900006
+anchor_bottom = 1.0
+offset_top = 58.791996
 offset_right = 0.0039978027
-offset_bottom = -0.0040016174
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Sprite" unique_id=805702396]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.93750006
+anchor_right = 1.1115556
+anchor_bottom = 1.0
+offset_right = -2.0159988
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+texture_under = SubResource("NoiseTexture2D_pxmsr")
+texture_progress = SubResource("NoiseTexture2D_njmff")
+tint_progress = Color(0.38039216, 1, 0.1764706, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=2029337514]
 wait_time = 5.0

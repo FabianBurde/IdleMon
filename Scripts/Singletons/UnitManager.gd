@@ -5,6 +5,7 @@ var unit_cost_dict: Dictionary = {
 	"Archer": 5,
 	"Mage": 12,
 }
+var army_container :GridContainer
 
 var unit_slots: Array[UnitContainer] = []
 

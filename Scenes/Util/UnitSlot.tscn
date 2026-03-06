@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bg4pv48i6uiq0"]
+
+[ext_resource type="Texture2D" uid="uid://drv3sobxiv1pv" path="res://Assets/Textures/DemoAssets/Unit_Slot_Demo.png" id="1_827an"]
+
+[node name="UnitSlot" type="TextureRect" unique_id=1412499205]
+custom_minimum_size = Vector2(36, 128)
+anchors_preset = -1
+anchor_right = 0.031000001
+anchor_bottom = 0.19800001
+offset_right = 0.2879982
+offset_bottom = -0.3040161
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_827an")

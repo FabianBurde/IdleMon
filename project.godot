@@ -25,6 +25,8 @@ LevelManager="*res://Scripts/Singletons/LevelManager.gd"
 ResourceManager="*res://Scripts/Singletons/Ressources.gd"
 SignalBus="*res://Scripts/Singletons/SignalBus.gd"
 UnitManager="*uid://bk0r21aw2saby"
+InputManager="*uid://dboq61p24hiye"
+AssetManager="*uid://djqvsx3hmlyfk"
 
 [display]
 

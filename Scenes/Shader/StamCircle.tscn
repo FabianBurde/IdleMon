@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dtk82x2a2w54b"]
+
+[ext_resource type="Shader" uid="uid://cbuikebnylbb3" path="res://Scenes/Shader/StamCircle.gdshader" id="1_qi5i1"]
+[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="2_h8r2w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h35nv"]
+shader = ExtResource("1_qi5i1")
+
+[node name="StamCircle" type="TextureRect" unique_id=290092847]
+material = SubResource("ShaderMaterial_h35nv")
+anchors_preset = -1
+anchor_right = 0.11100001
+anchor_bottom = 0.19800001
+offset_right = -127.87201
+offset_bottom = -128.30402
+texture = ExtResource("2_h8r2w")

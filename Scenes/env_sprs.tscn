@@ -1,24 +1,143 @@
 [gd_scene format=3 uid="uid://b0kt83yuc6fl"]
 
-[ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_bc0rb"]
+[ext_resource type="Texture2D" uid="uid://drm046q7kqjax" path="res://Assets/Textures/Env/LeftSidePanel_2_With Alpha.png" id="1_agjnv"]
+[ext_resource type="Texture2D" uid="uid://c7tstkkqx3q4s" path="res://Assets/Textures/Env/LeftSidePanel333.png" id="1_cqdbw"]
+[ext_resource type="Texture2D" uid="uid://b2cjeclv8pgi5" path="res://Assets/Textures/Env/LeftSidePanel_2_With Alpha_n.png" id="2_3pcp6"]
+[ext_resource type="Texture2D" uid="uid://db35llfemr734" path="res://Assets/Textures/Env/back_panel_01_placeholder.png" id="3_6e0la"]
+[ext_resource type="Texture2D" uid="uid://bv0m7ailfqp8s" path="res://Assets/Textures/DemoAssets/Ground2.png" id="4_3pcp6"]
+[ext_resource type="Texture2D" uid="uid://d1fj5qhfqo160" path="res://Assets/Textures/DemoAssets/Ground2_n.png" id="5_3pcp6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hik17"]
+transparency = 1
+albedo_texture = ExtResource("1_agjnv")
+normal_enabled = true
+normal_texture = ExtResource("2_3pcp6")
+anisotropy = -0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnfvd"]
+albedo_texture = ExtResource("4_3pcp6")
+albedo_texture_force_srgb = true
+normal_enabled = true
+normal_texture = ExtResource("5_3pcp6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6e0la"]
+diffuse_mode = 3
+albedo_texture = ExtResource("1_cqdbw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_cqdbw"]
+material = SubResource("StandardMaterial3D_6e0la")
+size = Vector2(4, 6)
+orientation = 0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_agjnv"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_3pcp6"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_agjnv")
+seamless = true
+
+[sub_resource type="FogMaterial" id="FogMaterial_hik17"]
+density = 2.315
+albedo = Color(0.15731731, 0.056270838, 0.0040290193, 1)
+emission = Color(0.08468988, 0.08468994, 0.08468992, 1)
+edge_fade = 1.3928816
+density_texture = SubResource("NoiseTexture3D_3pcp6")
 
 [node name="EnvSPRS" type="Node3D" unique_id=619778185]
 
 [node name="SideLeftSPR" type="Sprite3D" parent="." unique_id=1871394641]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -1)
+transform = Transform3D(0.28977776, 0, -0.077645704, 0, 0.29999995, 0, 0.077645704, 0, 0.28977776, -0.65, 0.707, -1)
+material_override = SubResource("StandardMaterial3D_hik17")
 axis = 0
-texture = ExtResource("1_bc0rb")
+texture_filter = 0
+texture = ExtResource("1_agjnv")
+
+[node name="SideLeftSPR2" type="Sprite3D" parent="." unique_id=167092228]
+transform = Transform3D(0.28977776, 0, -0.07764572, 0, 0.29999992, 0, 0.07764572, 0, 0.28977776, -0.86474955, 0.6959181, -0.69630134)
+axis = 0
+shaded = true
+alpha_cut = 1
+texture = ExtResource("1_agjnv")
+
+[node name="SideRIGHTSPR3" type="Sprite3D" parent="." unique_id=1781061026]
+transform = Transform3D(-0.27298838, 0, -0.124408014, 0, 0.3, 0, 0.124408014, 0, -0.27298838, 0.65, 0.7, -1)
+material_override = SubResource("StandardMaterial3D_hik17")
+flip_h = true
+axis = 0
+texture_filter = 0
+texture = ExtResource("1_agjnv")
+
+[node name="SideRIGHT2" type="Sprite3D" parent="." unique_id=1909004465]
+transform = Transform3D(-0.2862721, 0, -0.08971223, 0, 0.3, 0, 0.08971223, 0, -0.2862721, 0.93873, 0.9046935, -1.1788448)
+axis = 0
+shaded = true
+alpha_cut = 1
+texture = ExtResource("1_agjnv")
+
+[node name="copycontainer" type="Node3D" parent="." unique_id=792683100]
+
+[node name="SideLeftSPR" type="Sprite3D" parent="copycontainer" unique_id=1843798788]
+transform = Transform3D(0.5495238, 0, -0.24088095, 0, 0.6, 0, 0.24088095, 0, 0.5495238, -0.62833667, 0.76881814, -1.9820788)
+material_override = SubResource("StandardMaterial3D_hik17")
+axis = 0
+texture_filter = 0
+texture = ExtResource("1_agjnv")
+
+[node name="SideLeftSPR2" type="Sprite3D" parent="copycontainer" unique_id=747206640]
+transform = Transform3D(0.5495238, 0, -0.24088098, 0, 0.6, 0, 0.24088098, 0, 0.5495238, -0.88641286, 0.7577362, -1.7142226)
+axis = 0
+shaded = true
+alpha_cut = 1
+texture = ExtResource("1_agjnv")
+
+[node name="SideRIGHTSPR3" type="Sprite3D" parent="copycontainer" unique_id=1324590618]
+transform = Transform3D(-0.51047564, 0, -0.31530088, 0, 0.6, 0, 0.31530088, 0, -0.51047564, 0.6623497, 0.7618181, -1.9826068)
+material_override = SubResource("StandardMaterial3D_hik17")
+flip_h = true
+axis = 0
+texture_filter = 0
+texture = ExtResource("1_agjnv")
+
+[node name="SideRIGHT2" type="Sprite3D" parent="copycontainer" unique_id=616166400]
+transform = Transform3D(-0.545533, 0, -0.24978748, 0, 0.6, 0, 0.24978748, 0, -0.545533, 0.9263803, 0.9665116, -2.196238)
+axis = 0
+shaded = true
+alpha_cut = 1
+texture = ExtResource("1_agjnv")
 
 [node name="SideRightSPR" type="Sprite3D" parent="." unique_id=1250579413]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1)
+transform = Transform3D(0.28977776, 0, 0.07764568, 0, 0.29999998, 0, -0.07764568, 0, 0.28977776, 0.65, 0.7, -1.1)
+top_level = true
+visible = false
 axis = 0
-texture = ExtResource("1_bc0rb")
+texture = ExtResource("1_cqdbw")
+region_rect = Rect2(140, 302, 337, 300)
 
 [node name="GroundSPR" type="Sprite3D" parent="." unique_id=833774736]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.5294008, -1.476)
+material_override = SubResource("StandardMaterial3D_dnfvd")
 axis = 1
-texture = ExtResource("1_bc0rb")
+transparent = false
+texture_filter = 2
+texture = ExtResource("4_3pcp6")
 
 [node name="BGSPR" type="Sprite3D" parent="." unique_id=1827147968]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-texture = ExtResource("1_bc0rb")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2819957, -3.3020675)
+texture = ExtResource("3_6e0la")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=102062500]
+transform = Transform3D(0.9993934, 0, -0.03482975, 0, 1, 0, 0.03482975, 0, 0.9993934, -1, 0.7, -1.6080146)
+visible = false
+mesh = SubResource("QuadMesh_cqdbw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1688130951]
+transform = Transform3D(-0.9986803, 0, -0.05135995, 0, 1, 0, 0.05135995, 0, -0.9986803, 1, 0.7, -1.6080146)
+visible = false
+mesh = SubResource("QuadMesh_cqdbw")
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=851215173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09312689, 0, -3.005497)
+size = Vector3(4, 2, 2)
+material = SubResource("FogMaterial_hik17")
