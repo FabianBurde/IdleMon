@@ -3,7 +3,15 @@
 [ext_resource type="Script" uid="uid://bb7b23duvn3sk" path="res://Scenes/monster_scene.gd" id="1_6mfkf"]
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_b81yp"]
 [ext_resource type="Resource" uid="uid://cghnysrumryqh" path="res://Data/enemies/monster_01.tres" id="2_m3kkw"]
+[ext_resource type="Script" uid="uid://b00l4sikapxl1" path="res://Data/item.gd" id="3_lutgo"]
 [ext_resource type="Texture2D" uid="uid://ddwrym45ynh4b" path="res://Assets/Textures/Enemies/Bun02Frames.png" id="4_6sd04"]
+[ext_resource type="Resource" uid="uid://bv8iyphh3bjoa" path="res://Data/items/consumables/hppot01.tres" id="4_ew5m5"]
+[ext_resource type="Script" uid="uid://cri3yu7em8mty" path="res://Data/DropTableRes.gd" id="5_kqp62"]
+
+[sub_resource type="Resource" id="Resource_r70li"]
+script = ExtResource("5_kqp62")
+entries = Array[ExtResource("3_lutgo")]([ExtResource("4_ew5m5")])
+metadata/_custom_type_script = "uid://cri3yu7em8mty"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtcr2"]
 atlas = ExtResource("4_6sd04")
@@ -58,9 +66,9 @@ animations = [{
 [node name="monster_scene" type="Node3D" unique_id=1877539549]
 script = ExtResource("1_6mfkf")
 enemy_resource = ExtResource("2_m3kkw")
+drop_table = SubResource("Resource_r70li")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1573804360]
-visible = false
 billboard = 2
 texture = ExtResource("1_b81yp")
 
@@ -69,7 +77,10 @@ texture = ExtResource("1_b81yp")
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1838158178]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 top_level = true
+visible = false
 material_override = SubResource("StandardMaterial3D_6sd04")
 sprite_frames = SubResource("SpriteFrames_r70li")
 autoplay = "default"
 frame_progress = 0.7386767
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1128307813]

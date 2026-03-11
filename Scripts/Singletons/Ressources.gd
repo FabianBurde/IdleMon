@@ -1,7 +1,7 @@
 class_name  Ressources
 extends Node
 
-var global_gold: int = 50
+var global_gold: int = 10
 var global_enemies_killed: int = 0
 var max_level_progress: int = 1 # move to level manager?
 var unit_slots_unlocked: int = 4
@@ -12,7 +12,7 @@ var player_stats = {
 	"exp": 0,
 	"attack": 1,
 }
-var inventory_slots:int = 6
+var inventory_slots:int = 12
 var inventory_items: Array = []
 var save_timer: Timer
 var active_save_game: SaveGame = null
@@ -70,9 +70,13 @@ func load_savefile() -> void:
 	entity_dict = active_save_game.entity_dict
 	entity_id_counter = active_save_game.entity_id_counter
 	player_stats = active_save_game.player_stats
+	inventory_items = active_save_game.inventory_items
 	UnitManager.unit_cost_dict = active_save_game.units_cost_dict
 	SignalBus.update_ui_info.emit(global_gold, player_stats["exp"], player_stats["lvl"],LevelManager.enemies_in_level_killed)
 	SignalBus.units_loaded.emit()
+	#inventory_items.append(AssetManager.get_item("health_potion_01").duplicate())
+
+
 
 	## Breaks stuff -> invastigate why it was here in the first place
 	#SignalBus.level_advanced.emit()
@@ -90,6 +94,7 @@ func save_game() -> void:
 	active_save_game.entity_dict = entity_dict
 	active_save_game.entity_id_counter = entity_id_counter
 	active_save_game.player_stats = player_stats
+	active_save_game.inventory_items = inventory_items
 	active_save_game.units_cost_dict = UnitManager.unit_cost_dict
 	var error_code = ResourceSaver.save(active_save_game, active_save_file_path)
 	if error_code != OK:

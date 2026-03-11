@@ -5,10 +5,11 @@ extends Moveable
 
 var disabled: bool = false
 var swap_target: InventoryItem = null
-var item_data : ItemRes
+var item_data : ItemRes = null
 
 var swap_ref: InventoryItem = null
 var consume_ref: UnitContainer = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,7 +18,7 @@ func _ready() -> void:
 		scale_tween(0.8,Tween.TRANS_SINE)
 		self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		item_sprite.texture = null
-	else:
+	if item_data:
 		item_sprite.texture = item_data.item_tex
 		self.modulate = Color(1, 1, 1, 1)
 		self.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -25,6 +26,24 @@ func _ready() -> void:
 		#self.create_tween().tween_property(self, "scale", Vector2(1, 1), 1.6).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		scale_tween(1.6,Tween.TRANS_ELASTIC)
 		set_tooltip()
+	else:
+		self.item_sprite.texture = null
+		self.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func _process(delta: float) -> void:
+	if dragging:
+		for slot in UnitManager.army_container.get_children():
+			for unit in slot.get_children():
+				if unit.get_global_rect().has_point(get_global_mouse_position()):
+					unit.modulate = Color(0.5, 1, 0.5)
+				else:
+					unit.modulate = Color(1, 1, 1)
+
+func updata_data():
+	item_sprite.texture = item_data.item_tex
+	self.modulate = Color(1, 1, 1, 1)
+	self.mouse_filter = Control.MOUSE_FILTER_STOP
+	set_tooltip()
 
 func scale_tween(time: float,trans: Tween.TransitionType) -> void:
 	self.scale = Vector2(0.2, 0.2)
@@ -36,16 +55,10 @@ func set_tooltip() -> void:
 		return
 	tooltip_text = "%s\nValue: %d\nType: %s" % [item_data.name, item_data.value, str(item_data.type)]
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func has_drop_target() -> bool:
 	var mouse_pos = get_global_mouse_position()
 	var parent = get_parent()
-	for item in parent.inventory_items:
+	for item in parent.inventory_slots:
 		if item.get_global_rect().has_point(mouse_pos) and item != self and !item.disabled:
 			swap_ref = item
 			return true
@@ -67,7 +80,13 @@ func stop_drag() -> void:
 			swap_ref = null
 		elif consume_ref:
 			if item_data.type == ItemRes.ItemType.CONSUMABLE:
-				consume()
+				var consume_result = consume_ref.consume_item_effect(self.item_data)
+				## consume needs to come after because the data gets nulled
+				if consume_result:
+					consume()
+				else:
+					self.global_position = drag_start_position
+				consume_ref = null
 			elif item_data.type == ItemRes.ItemType.EQUIPPABLE:
 				equip()
 			consume_ref = null
@@ -82,7 +101,8 @@ func swap_items(target: InventoryItem) -> void:
 		self.item_data = temp_data
 		item_sprite.texture = item_data.item_tex
 		target.item_sprite.texture = target.item_data.item_tex
-		set_tooltip()
+		self.set_tooltip()
+		target.set_tooltip()
 	elif !target.disabled and target.item_data == null:
 		target.item_data = self.item_data
 		self.item_data = null
@@ -90,7 +110,7 @@ func swap_items(target: InventoryItem) -> void:
 		target.item_sprite.texture =  target.item_data.item_tex
 		self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		target.mouse_filter = Control.MOUSE_FILTER_STOP
-		set_tooltip()
+		self.set_tooltip()
 	print(item_data)
 	self.global_position = drag_start_position
 	#update visuals here
@@ -111,4 +131,5 @@ func equip() -> void:
 	item_data = null
 	item_sprite.texture = null
 	self.global_position = drag_start_position
+	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_tooltip()

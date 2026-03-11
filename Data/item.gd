@@ -12,8 +12,9 @@ enum ItemType {
 @export var type: ItemType
 
 @export var item_tex: Texture2D
-@export var consume_effect: Dictionary
-@export var equip_effect: Dictionary
+@export var consume_effect: Dictionary = {}
+@export var equip_effect: Dictionary = {}
+@export var item_drop_rate: float = 0.0
 
 #func _init(_name: String, _value: int = 0, _type: ItemType = ItemType.CONSUMABLE, _item_tex: Texture2D = null) -> void:
 #	name = _name

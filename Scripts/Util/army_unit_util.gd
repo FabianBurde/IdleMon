@@ -5,6 +5,7 @@ extends Moveable
 @onready var spr = $Sprite
 @onready var attack_timer = $AttackTimer
 @onready var time_lbl = $Sprite/ATKTimeLBL
+@onready var healthbar = $Sprite/HealthBar
 @export var army_unit:UnitRes
 
 ## TODO Implement viewable unit Equipment Window and item equipping. ##
@@ -18,7 +19,6 @@ var is_selected:bool = false
 var spawn_tween:Tween
 var attack_tween:Tween
 
-var spawn_position:Vector2
 var swap_target:Control = null
 var is_in_merge_mode:bool = false
 
@@ -49,6 +49,9 @@ func _ready() -> void:
 	print(army_unit)
 	star_progress.value = army_unit.star_value
 	update_tooltip()
+	healthbar.max_value = army_unit.health
+	take_damage(15.0)
+	healthbar.value = army_unit.health
 	#spawn_position = self.global_position
 	scale_tween(1.6,Tween.TRANS_ELASTIC)
 	if LevelManager.active_enemy:
@@ -101,6 +104,15 @@ func attack_timeout():
 	else:
 		stop_attack_timer()
 	
+func take_damage(dmg_amount: float) -> void:
+	army_unit.health -= dmg_amount
+	update_tooltip()
+	update_healthbar()
+	if army_unit.health <= 0:
+		delete_unit()
+
+func update_healthbar():
+	healthbar.value = army_unit.health
 
 func has_drop_target() -> bool:
 	var mouse_pos = get_global_mouse_position()
@@ -137,6 +149,7 @@ func has_drop_target() -> bool:
 
 func stop_drag() -> void:
 	dragging = false
+	is_selected = false
 	var drop_target = has_drop_target()
 	if drop_target and swap_target is UnitContainer and swap_target != self:
 		print("found target")
@@ -198,6 +211,8 @@ func swap_unit(other_unit:UnitContainer):
 	self_parent.remove_child(self)
 	other_parent.add_child(self)
 	self_parent.add_child(other_unit)
+	self.position = Vector2(0,0)
+	other_unit.position = Vector2(0,0)
 	#var temp_position = self.spawn_position
 	#print(other_unit.global_position)
 	#print(temp_position)
@@ -207,10 +222,18 @@ func swap_unit(other_unit:UnitContainer):
 func unit_clicked():
 	print("Unit Clicked: %s" % army_unit.unit_name)
 
-func consume_item(item: ItemRes):
+func consume_item_effect(item_data: ItemRes) -> bool:
+	var item = item_data
 	for key in item.consume_effect.keys():
 		if key == "health":
-			army_unit.health += item.consume_effect[key]
+			if (army_unit.health + item.consume_effect[key]) >= healthbar.max_value and army_unit.health != healthbar.max_value:
+				army_unit.health = healthbar.max_value
+				update_healthbar()
+			elif (army_unit.health + item.consume_effect[key]) <= healthbar.max_value:
+				army_unit.health += item.consume_effect[key]
+				update_healthbar()
+			else:
+				return false	
 		elif key == "phys_dmg":
 			army_unit.phys_dmg += item.consume_effect[key]
 		elif key == "magic_dmg":
@@ -221,3 +244,5 @@ func consume_item(item: ItemRes):
 			army_unit.magic_def += item.consume_effect[key]
 		elif key == "speed":
 			army_unit.speed += item.consume_effect[key]
+	update_tooltip()
+	return true

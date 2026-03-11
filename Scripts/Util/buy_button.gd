@@ -14,3 +14,12 @@ func _ready() -> void:
 func update_button_cost(unit_name: String) -> void:
 	var unit_cost = UnitManager.unit_cost_dict.get(unit_name, 0)
 	cost_lbl.text = "Cost:" + str(unit_cost)
+
+
+func btn_hovered():
+	self.scale = Vector2(1.1, 1.1)
+	self.modulate = Color(1, 1, 1, 0.8)
+
+func btn_unhovered():
+	self.scale = Vector2(1, 1)
+	self.modulate = Color(1, 1, 1, 1)

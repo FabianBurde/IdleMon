@@ -6,6 +6,10 @@ var current_bumb = 0.0
 @export var vert_bumping:bool = true
 @export var enemy_resource:Resource
 @onready var name_label:Label3D = $NameLBL
+
+@export var drop_table:DropTableRes
+@onready var drop_util_scene = preload("res://Scenes/Util/ItemDropUtil.tscn")
+
 var current_health
 var max_health
 enum MONSTER_TYPES {normal, boss}
@@ -43,6 +47,12 @@ func die()-> void:
 		SignalBus.level_advanced.emit()
 	LevelManager.active_enemy = null
 	SignalBus.enemy_dead.emit()
+	#Handle drops
+	var drops = drop_table.roll_items()
+	for item in drops:
+		SignalBus.item_droped.emit(item)
+
+
 	SignalBus.update_ui_info.emit(ResourceManager.global_gold, ResourceManager.player_stats["exp"], ResourceManager.player_stats["lvl"],LevelManager.enemies_in_level_killed)
 	ResourceManager.save_game()
 	self.queue_free()
@@ -57,5 +67,5 @@ func vert_bump(delt:float):
 		current_bumb += delt * bump_rate
 		position.y = sin(current_bumb) * 0.15
 	else:
-		position.y = 0.0
+		position.y = 1.0
 		current_bumb = 0.0

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemRes" format=3 uid="uid://clq4bqans710w"]
+
+[ext_resource type="Script" uid="uid://b00l4sikapxl1" path="res://Data/item.gd" id="1_haycs"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_haycs"]
+noise_type = 3
+frequency = 0.2034
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vpepr"]
+width = 32
+height = 32
+noise = SubResource("FastNoiseLite_haycs")
+
+[resource]
+script = ExtResource("1_haycs")
+name = "ATK +1"
+value = 15
+item_tex = SubResource("NoiseTexture2D_vpepr")
+consume_effect = {
+"phys_dmg": 1
+}
+item_drop_rate = 50.0
+metadata/_custom_type_script = "uid://b00l4sikapxl1"

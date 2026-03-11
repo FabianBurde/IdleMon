@@ -21,13 +21,14 @@ height = 8
 noise = SubResource("FastNoiseLite_pxmsr")
 
 [node name="UnitContainer" type="MarginContainer" unique_id=112225414]
-z_index = 1
+z_index = 555
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = -1
 anchor_right = 0.03287501
 anchor_bottom = 0.20417286
 offset_right = 2.1279907
 offset_bottom = -0.3040161
+mouse_filter = 0
 theme = ExtResource("1_w1cea")
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
@@ -72,7 +73,7 @@ anchor_bottom = 1.0
 offset_top = 58.791996
 offset_right = 0.0039978027
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Sprite" unique_id=805702396]
+[node name="HealthBar" type="TextureProgressBar" parent="Sprite" unique_id=805702396]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.93750006

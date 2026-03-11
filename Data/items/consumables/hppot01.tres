@@ -8,4 +8,8 @@ script = ExtResource("2_o5pe4")
 name = "Health Potion"
 value = 10
 item_tex = ExtResource("1_5nugt")
+consume_effect = {
+"health": 10
+}
+item_drop_rate = 50.0
 metadata/_custom_type_script = "uid://b00l4sikapxl1"

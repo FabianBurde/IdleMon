@@ -7,6 +7,9 @@ signal update_ui_info(gold,exp,level,lvlprogress)
 signal unit_attack(attack_value)
 signal game_loaded
 
+signal item_droped(item_resource: ItemRes)
+signal item_added_to_inventory(item_resource: ItemRes)
+
 signal units_loaded
 
 signal unit_bought(unit_name: String)

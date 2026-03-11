@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dq5cvkcvcfp1y"]
+
+[ext_resource type="Script" uid="uid://dhok4pjtjwttl" path="res://Scripts/Util/item_drop_util.gd" id="1_f4miv"]
+
+[node name="ItemDropUtil" type="TextureRect" unique_id=759252298]
+z_as_relative = false
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = -1
+anchor_right = 0.028
+anchor_bottom = 0.049000002
+offset_right = -0.25600052
+offset_bottom = 0.24799919
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_f4miv")
+
+[connection signal="mouse_entered" from="." to="." method="pickup_item"]

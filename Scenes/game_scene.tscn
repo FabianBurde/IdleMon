@@ -41,7 +41,8 @@ albedo_color = Color(0.0253638, 0.0253638, 0.025363795, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fiftr"]
 material = SubResource("StandardMaterial3D_6h5vk")
-radius = 0.2
+radius = 0.15
+height = 0.6
 
 [node name="GameScene" type="Node3D" unique_id=1099018625]
 script = ExtResource("1_b6fju")
@@ -80,7 +81,7 @@ texture = ExtResource("1_x87qo")
 environment = SubResource("Environment_6h5vk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=341670904]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.033445716, 0, -3)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.053844124, -0.15485686, -3)
 mesh = SubResource("SphereMesh_fiftr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1095474067]

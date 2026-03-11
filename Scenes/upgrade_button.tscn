@@ -27,17 +27,23 @@ texture_hover = SubResource("GradientTexture2D_ymg7c")
 script = ExtResource("2_yieou")
 
 [node name="Name" type="Label" parent="." unique_id=909030406]
+z_index = 2
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -9.5
-offset_right = 9.5
-offset_bottom = 23.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -43.0
+offset_right = 10.0
+offset_bottom = -20.0
 grow_horizontal = 2
+grow_vertical = 0
 text = "+1"
 
 [node name="CostLBL" type="Label" parent="." unique_id=1404389538]
+z_index = 2
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -50,3 +56,6 @@ offset_right = 17.5
 grow_horizontal = 2
 grow_vertical = 0
 text = "Cost"
+
+[connection signal="mouse_entered" from="." to="." method="btn_hovered"]
+[connection signal="mouse_exited" from="." to="." method="btn_unhovered"]

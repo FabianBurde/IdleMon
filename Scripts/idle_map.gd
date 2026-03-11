@@ -5,6 +5,7 @@ const MAX_ARMY_SIZE = 40
 var dmg_num_util = preload("res://Scenes/Util/DmgNumUtil.tscn")
 var unit_scene = preload("res://Scenes/Util/ArmyUnitUtil.tscn")
 var unit_slot_scene = preload("res://Scenes/Util/UnitSlot.tscn")
+var drop_util_scene = preload("res://Scenes/Util/ItemDropUtil.tscn")
 
 @export var game_scene:Node3D
 @onready var monster_health_bar:TextureProgressBar = %MonsterHealthBar
@@ -16,6 +17,12 @@ var unit_slot_scene = preload("res://Scenes/Util/UnitSlot.tscn")
 @onready var lvl_progress_lbl:Label = %LevelProgressLabel
 @onready var lvl_name_lbl:Label = %LevelNameLabel
 @onready var monster_btn:TextureButton =  %MonsterBtn
+#Mini Menu
+@onready var inventory_btn:TextureButton = %InventoryBTN
+@onready var inventory_container:TextureRect = %Inventory
+#Drop Zone
+@onready var drop_zone:Control = %ItemDropZone
+@onready var settings_btn:TextureButton = %SettingsBTN
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +34,7 @@ func _ready() -> void:
 	SignalBus.enemy_spawned.connect(update_enemy_health_bar)
 	SignalBus.level_advanced.connect(update_level_name)
 	SignalBus.unit_merged.connect(add_merged_unit)
+	SignalBus.item_droped.connect(add_dropped_item)
 	ResourceManager.load_savefile()
 	update_level_name()
 	UnitManager.army_container = army_container
@@ -68,7 +76,7 @@ func attack_emeny(attack_value) -> void:
 	num.global_position = get_viewport().get_mouse_position()
 	num.global_position = monster_btn.global_position
 	num.global_position.x += randi() %165
-	num.global_position.y += randi() % 120
+	num.global_position.y += randi() % 120 +60
 	num.dmg_num = attack_value
 	add_child(num)
 	game_scene.current_monster.take_damage(attack_value)
@@ -158,7 +166,6 @@ func load_army_units() -> void:
 				if unit_icon.army_unit.unit_slot_id == slot:
 					slots[slot].add_child(unit_icon)
 
-		unit_icon.spawn_position = unit_icon.global_position
 		#quick fix because enemy spawn signal fires before units are fully ready
 	SignalBus.enemy_spawned.emit()
 
@@ -169,6 +176,21 @@ func load_army_slots() -> void:
 	for i in range(ResourceManager.unit_slots_unlocked):
 		var slot = unit_slot_scene.instantiate()
 		army_container.add_child(slot)
+
+func toggle_inventory() -> void:
+	if inventory_container.visible:
+		inventory_container.hide()
+	else:
+		inventory_container.show()
+
+func toggle_settings() -> void:
+	print("Settings Button Pressed")
+
+func add_dropped_item(item_resource: ItemRes) -> void:
+	var drop_instance = drop_util_scene.instantiate()
+	drop_instance.item_resource = item_resource
+	drop_zone.add_child(drop_instance)
+	#drop_instance.
 
 ### TODO DELETE LATER ###
 func manual_save() -> void:

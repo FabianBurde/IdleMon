@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://badch2rvwjvv0"]
+
+[node name="DragablePanel" type="Control" unique_id=1318795887]
+layout_mode = 3
+anchor_right = 0.3246528
+anchor_bottom = 0.3919753
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=1987066099]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="." unique_id=869933903]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.079
+offset_bottom = -0.065999985
+
+[node name="Label" type="Label" parent="Panel2" unique_id=1668512523]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "TEST"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1183635435]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.091000006
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.1140022
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,12 +1,13 @@
 extends Label
 
-@export var dmg_num: int = 5
+@export var dmg_num: float = 5.0
 @export var float_speed: float = 50.0
 @export var fade_speed: float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	text = str(dmg_num)
+	z_index = 1000
 	pass # Replace with function body.
 
 

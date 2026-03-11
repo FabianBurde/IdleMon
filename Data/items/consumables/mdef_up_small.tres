@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemRes" format=3 uid="uid://dm83pt3ebd83u"]
+
+[ext_resource type="Script" uid="uid://b00l4sikapxl1" path="res://Data/item.gd" id="1_3gv5u"]
+
+[resource]
+script = ExtResource("1_3gv5u")
+consume_effect = {
+"magic_def": 1
+}
+metadata/_custom_type_script = "uid://b00l4sikapxl1"
