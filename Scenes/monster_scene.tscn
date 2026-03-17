@@ -73,6 +73,8 @@ billboard = 2
 texture = ExtResource("1_b81yp")
 
 [node name="NameLBL" type="Label3D" parent="." unique_id=237563031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.01)
+text = "This is a Bug if u see this"
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1838158178]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
@@ -84,3 +86,7 @@ autoplay = "default"
 frame_progress = 0.7386767
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1128307813]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="attack_army"]

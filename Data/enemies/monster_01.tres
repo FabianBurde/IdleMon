@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_w5bmn")
 health = 15.0
-attack = 5.0
-attack_rate = 1.0
+attack = 2.0
+attack_rate = 3.0
 enemy_tex = ExtResource("1_jgepf")
 enemy_name = "Bunny"
 gold_reward = 1

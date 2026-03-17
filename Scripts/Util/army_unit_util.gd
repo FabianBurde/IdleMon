@@ -15,16 +15,15 @@ var merge_container
 var merge_slot1 
 var merge_slot2
 var star_value:int = 1
-var is_selected:bool = false
 var spawn_tween:Tween
 var attack_tween:Tween
+var disabled:bool = false
 
 var swap_target:Control = null
 var is_in_merge_mode:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	SignalBus.enemy_dead.connect(stop_attack_timer)
 	SignalBus.enemy_spawned.connect(start_attack_timer)
 	if army_unit == null:
@@ -80,7 +79,7 @@ func stop_attack_timer():
 
 func start_attack_timer():
 	#attack_timer.wait_time = floorf(max(1.0, 5.0 - (0.1 * army_unit.speed)))
-	if is_in_merge_mode:
+	if is_in_merge_mode or disabled:
 		return
 	attack_timer.start()
 
@@ -109,7 +108,14 @@ func take_damage(dmg_amount: float) -> void:
 	update_tooltip()
 	update_healthbar()
 	if army_unit.health <= 0:
-		delete_unit()
+		##move to graveyard instead and delte from Unimanager
+		UnitManager.unit_slots[army_unit.unit_slot_id] = null
+		stop_attack_timer()
+		disabled = true
+		drag_disabled = true
+		self.get_parent().remove_child(self)
+		SignalBus.unit_died.emit(self)
+		#delete_unit()
 
 func update_healthbar():
 	healthbar.value = army_unit.health
@@ -149,7 +155,6 @@ func has_drop_target() -> bool:
 
 func stop_drag() -> void:
 	dragging = false
-	is_selected = false
 	var drop_target = has_drop_target()
 	if drop_target and swap_target is UnitContainer and swap_target != self:
 		print("found target")
@@ -213,6 +218,13 @@ func swap_unit(other_unit:UnitContainer):
 	self_parent.add_child(other_unit)
 	self.position = Vector2(0,0)
 	other_unit.position = Vector2(0,0)
+	## SWAP IN UnitManager aswell
+	UnitManager.unit_slots[self_slot_id] = other_unit
+	UnitManager.unit_slots[other_slot_id] = self
+	other_unit.update_res_dict()
+	self.update_res_dict()
+
+	start_attack_timer()
 	#var temp_position = self.spawn_position
 	#print(other_unit.global_position)
 	#print(temp_position)

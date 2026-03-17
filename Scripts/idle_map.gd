@@ -23,6 +23,8 @@ var drop_util_scene = preload("res://Scenes/Util/ItemDropUtil.tscn")
 #Drop Zone
 @onready var drop_zone:Control = %ItemDropZone
 @onready var settings_btn:TextureButton = %SettingsBTN
+#Left Menu
+@onready var graveyard_container:VBoxContainer = %GraveyardContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,6 +33,7 @@ func _ready() -> void:
 	SignalBus.update_ui_info.connect(update_ui_info)
 	SignalBus.units_loaded.connect( load_army_units )
 	SignalBus.unit_attack.connect(attack_emeny)
+	SignalBus.unit_died.connect(move_unit_to_graveyard)
 	SignalBus.enemy_spawned.connect(update_enemy_health_bar)
 	SignalBus.level_advanced.connect(update_level_name)
 	SignalBus.unit_merged.connect(add_merged_unit)
@@ -75,8 +78,8 @@ func attack_emeny(attack_value) -> void:
 	var num = dmg_num_util.instantiate()
 	num.global_position = get_viewport().get_mouse_position()
 	num.global_position = monster_btn.global_position
-	num.global_position.x += randi() %165
-	num.global_position.y += randi() % 120 +60
+	num.global_position.x += randi() %265
+	num.global_position.y += randi() % 120 +20
 	num.dmg_num = attack_value
 	add_child(num)
 	game_scene.current_monster.take_damage(attack_value)
@@ -191,6 +194,9 @@ func add_dropped_item(item_resource: ItemRes) -> void:
 	drop_instance.item_resource = item_resource
 	drop_zone.add_child(drop_instance)
 	#drop_instance.
+
+func move_unit_to_graveyard(unit:Control):
+	graveyard_container.add_child(unit)
 
 ### TODO DELETE LATER ###
 func manual_save() -> void:

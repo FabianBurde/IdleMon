@@ -1,15 +1,17 @@
 extends Node3D
 
-var bump_rate : float = 0.7
-var current_bumb = 0.0
+var bump_rate : float = 0.2
+var current_bump = 0.0
 @onready var mon_spr = $Sprite3D
 @export var vert_bumping:bool = true
 @export var enemy_resource:Resource
 @onready var name_label:Label3D = $NameLBL
+@onready var attack_timer:Timer = $AttackTimer
 
 @export var drop_table:DropTableRes
 @onready var drop_util_scene = preload("res://Scenes/Util/ItemDropUtil.tscn")
 
+var attack_tween
 var current_health
 var max_health
 enum MONSTER_TYPES {normal, boss}
@@ -30,6 +32,7 @@ func _ready() -> void:
 		name_label.text = enemy_resource.enemy_name + " [BOSS]"
 		SignalBus.enemy_spawned.emit()
 	LevelManager.active_enemy = self
+	attack_timer.wait_time = enemy_resource.attack_rate
 	mon_spr.scale = Vector3(0.5,0.5,0.5) * (1 + 0.1 * LevelManager.current_level)
 
 func take_damage(val) -> void:
@@ -37,6 +40,20 @@ func take_damage(val) -> void:
 	if current_health <= 0:
 		print("Enemy Dead")
 		die()
+
+func attack_army() -> void:
+	if UnitManager.unit_slots.size() > 0:
+		var target_unit = null
+		for i in range(UnitManager.unit_slots.size()):
+			if UnitManager.unit_slots[i] != null:
+				target_unit = UnitManager.unit_slots[i]
+				break
+		if attack_tween:
+			attack_tween.kill()
+		attack_tween = create_tween()
+		attack_tween.tween_property(mon_spr, "modulate", Color.RED, 0.5)
+		attack_tween.tween_property(mon_spr, "modulate", Color.WHITE, 0.5)
+		target_unit.take_damage(enemy_resource.attack)
 
 func die()-> void:
 	ResourceManager.add_gold(enemy_resource.gold_reward)
@@ -60,12 +77,5 @@ func die()-> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if vert_bumping:
-		vert_bump(delta)
-
-func vert_bump(delt:float):
-	if position.y >= 0.0:
-		current_bumb += delt * bump_rate
-		position.y = sin(current_bumb) * 0.15
-	else:
-		position.y = 1.0
-		current_bumb = 0.0
+		current_bump = fmod(current_bump + delta * bump_rate, TAU)
+		position.y = sin(current_bump) * 0.15

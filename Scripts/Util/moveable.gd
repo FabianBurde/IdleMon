@@ -19,7 +19,7 @@ func _gui_input(event: InputEvent) -> void:
 		var drag_distance = event.position.distance_to(drag_start_position)
 		if drag_distance > drag_threshold:
 			self.global_position += event.relative
-	if event is InputEventMouseButton and event.button_index == MouseButton.MOUSE_BUTTON_LEFT and not event.pressed:
+	if event is InputEventMouseButton and event.button_index == MouseButton.MOUSE_BUTTON_LEFT and not event.pressed and !drag_disabled:
 		self.stop_drag()
 
 func start_drag() -> void:
