@@ -10,6 +10,9 @@ enum ItemType {
 @export var name: String
 @export var value: int
 @export var type: ItemType
+@export var is_stackable: bool
+@export var stack_size: int
+var current_stack_size:int = 1
 
 @export var item_tex: Texture2D
 @export var consume_effect: Dictionary = {}
@@ -21,6 +24,12 @@ enum ItemType {
 #	value = _value
 #	type = _type
 #	item_tex = _item_tex
+
+func increase_stack_size(amount:int):
+	self.current_stack_size += amount
+
+func decrease_stack_size(amount:int):
+	self.current_stack_size -= amount
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

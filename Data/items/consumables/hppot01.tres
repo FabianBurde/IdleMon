@@ -7,6 +7,8 @@
 script = ExtResource("2_o5pe4")
 name = "Health Potion"
 value = 10
+is_stackable = true
+stack_size = 99
 item_tex = ExtResource("1_5nugt")
 consume_effect = {
 "health": 10

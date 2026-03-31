@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bk3dypbp6ujna"]
 
 [ext_resource type="Texture2D" uid="uid://dia1216g0sbjg" path="res://icon.svg" id="1_lmwtk"]
-[ext_resource type="Script" uid="uid://c3615vqjr7waw" path="res://Scripts/Util/buy_button.gd" id="2_yieou"]
+[ext_resource type="Script" uid="uid://dwnawur1w8dio" path="res://Scripts/UI/upgrade_button.gd" id="2_yieou"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ww72c"]
 
@@ -9,11 +9,6 @@
 width = 128
 height = 128
 noise = SubResource("FastNoiseLite_ww72c")
-
-[sub_resource type="Gradient" id="Gradient_yieou"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ymg7c"]
-gradient = SubResource("Gradient_yieou")
 
 [node name="UnitBuyBtn" type="TextureButton" unique_id=1261515048]
 anchors_preset = -1
@@ -23,7 +18,6 @@ offset_right = 0.12799072
 offset_bottom = -0.3040161
 texture_normal = ExtResource("1_lmwtk")
 texture_pressed = SubResource("NoiseTexture2D_dfmsr")
-texture_hover = SubResource("GradientTexture2D_ymg7c")
 script = ExtResource("2_yieou")
 
 [node name="Name" type="Label" parent="." unique_id=909030406]

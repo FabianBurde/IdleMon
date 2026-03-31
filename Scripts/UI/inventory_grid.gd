@@ -31,16 +31,20 @@ func load_item_data():
 		for slot in inventory_slots:
 			if slot.item_data == null:
 				slot.item_data = item
-				slot.updata_data()
+				slot.update_data()
 				break
 
 
 func add_new_item(item_resource: ItemRes) -> void:
 	for slot in inventory_slots:
+		if item_resource.is_stackable and slot.item_data == item_resource and slot:
+			slot.item_data.increase_stack_size(1)
+			slot.update_data()
+			break
 		if slot.item_data == null and !slot.disabled:
 			slot.item_data = item_resource
 			slot.set_tooltip()
-			slot.updata_data()
+			slot.update_data()
 			slot.scale_tween(1.6,Tween.TRANS_ELASTIC)
 			ResourceManager.inventory_items.append(item_resource)
 			ResourceManager.save_game()

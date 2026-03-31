@@ -110,6 +110,7 @@ func take_damage(dmg_amount: float) -> void:
 	if army_unit.health <= 0:
 		##move to graveyard instead and delte from Unimanager
 		UnitManager.unit_slots[army_unit.unit_slot_id] = null
+		UnitManager.graveyard_slots.append(self)
 		stop_attack_timer()
 		disabled = true
 		drag_disabled = true
@@ -120,6 +121,8 @@ func take_damage(dmg_amount: float) -> void:
 func update_healthbar():
 	healthbar.value = army_unit.health
 
+
+### THIS whole function needs a refactor
 func has_drop_target() -> bool:
 	var mouse_pos = get_global_mouse_position()
 	var parent = get_parent().get_parent()
@@ -129,9 +132,6 @@ func has_drop_target() -> bool:
 	#merge_container = get_node("MarginContainer/HBoxContainer2/VBoxContainer/UILower/MergeContainer")
 	var search_rec_slot1 = Rect2(merge_slot1.global_position - Vector2(1,1), Vector2(128.0,128.0))
 	var search_rec_slot2 = Rect2(merge_slot2.global_position - Vector2(1,1), Vector2(128.0,128.0))
-	print(search_rec_slot1)
-	print(search_rec_slot2)
-	print(mouse_pos)
 	if search_rec_slot1.has_point(mouse_pos) and merge_container.visible:
 		swap_target = merge_slot1
 		print("Found merge slot 1")
@@ -142,6 +142,11 @@ func has_drop_target() -> bool:
 		swap_target = merge_slot2
 		return true
 	for child in parent.get_children():
+		if child.get_child_count() == 0:
+			var child_rect = Rect2(child.global_position, child.custom_minimum_size)
+			if child_rect.has_point(mouse_pos):
+				swap_target = child
+				return true
 		if child.get_child(0) is UnitContainer and child != self:
 			var child_rect = Rect2(child.global_position, child.custom_minimum_size)
 			if child_rect.has_point(mouse_pos):
@@ -173,6 +178,9 @@ func stop_drag() -> void:
 		self.stop_attack_timer()
 		self.is_in_merge_mode = true
 		merge_container.confirm_slot2(self)
+		swap_target = null
+	elif drop_target and swap_target is TextureRect:
+		print("swapping with empty slot")
 		swap_target = null
 	else:
 		self.global_position = drag_start_position

@@ -32,7 +32,7 @@ func _ready() -> void:
 		load_army_slots()
 	SignalBus.update_ui_info.connect(update_ui_info)
 	SignalBus.units_loaded.connect( load_army_units )
-	SignalBus.unit_attack.connect(attack_emeny)
+	SignalBus.unit_attack.connect(attack_enemy)
 	SignalBus.unit_died.connect(move_unit_to_graveyard)
 	SignalBus.enemy_spawned.connect(update_enemy_health_bar)
 	SignalBus.level_advanced.connect(update_level_name)
@@ -44,6 +44,8 @@ func _ready() -> void:
 
 	
 
+func debug_kill_current_enemy():
+	attack_enemy(99999999)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -57,7 +59,7 @@ func update_ui_info(gold, experience, level,lvlprogress) -> void:
 	exp_bar.max_value = (exp_to_next_level)
 	lvl_progress_lbl.text = "Stage Progress: %d%% / %d" % [lvlprogress, LevelManager.level_data["levels"][LevelManager.current_level]["enemy_amount"]]
 func player_attack() -> void:
-	attack_emeny(ResourceManager.player_stats["attack"])
+	attack_enemy(ResourceManager.player_stats["attack"])
 
 func update_enemy_health_bar() -> void:
 	if game_scene.current_monster == null:
@@ -71,7 +73,7 @@ func update_level_name() -> void:
 	lvl_name_lbl.text = " Level %d: %s" % [LevelManager.current_level, level_name]
 
 
-func attack_emeny(attack_value) -> void:
+func attack_enemy(attack_value) -> void:
 	if !game_scene.current_monster:
 		return
 	#print("Attack Enemy")
@@ -79,7 +81,7 @@ func attack_emeny(attack_value) -> void:
 	num.global_position = get_viewport().get_mouse_position()
 	num.global_position = monster_btn.global_position
 	num.global_position.x += randi() %265
-	num.global_position.y += randi() % 120 +20
+	num.global_position.y += randi() % 220 +50
 	num.dmg_num = attack_value
 	add_child(num)
 	game_scene.current_monster.take_damage(attack_value)

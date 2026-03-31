@@ -2,9 +2,9 @@ class_name InventoryItem
 extends Moveable
 
 @onready var item_sprite: TextureRect = $SpriteItem
+@onready var item_stack_lbl: Label = $SpriteItem/StackSize
 
 var disabled: bool = false
-var swap_target: InventoryItem = null
 var item_data : ItemRes = null
 
 var swap_ref: InventoryItem = null
@@ -39,10 +39,14 @@ func _process(delta: float) -> void:
 				else:
 					unit.modulate = Color(1, 1, 1)
 
-func updata_data():
+func update_data():
 	item_sprite.texture = item_data.item_tex
 	self.modulate = Color(1, 1, 1, 1)
 	self.mouse_filter = Control.MOUSE_FILTER_STOP
+	if item_data.is_stackable:
+		item_stack_lbl.text = str(item_data.current_stack_size)
+	else:
+		item_stack_lbl.text = ""
 	set_tooltip()
 
 func scale_tween(time: float,trans: Tween.TransitionType) -> void:
@@ -117,12 +121,18 @@ func swap_items(target: InventoryItem) -> void:
 	
 
 func consume() -> void:
+	if self.item_data.current_stack_size > 1:
+		self.item_data.decrease_stack_size(1)
+		self.global_position = drag_start_position
+		update_data()
+		return
 	#apply item effect
 	#remove from inventory
 	self.item_data = null
 	self.item_sprite.texture = null
 	self.global_position = drag_start_position
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	self.item_stack_lbl.text = ""
 	set_tooltip()
 
 func equip() -> void:

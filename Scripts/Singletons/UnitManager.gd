@@ -5,9 +5,14 @@ var unit_cost_dict: Dictionary = {
 	"Archer": 5,
 	"Mage": 12,
 }
+var upgrade_cost_dict: Dictionary = {
+	"Meele Up": 5,
+	"Unit Slot Up": 4
+}
 var army_container :GridContainer
 
 var unit_slots: Array[UnitContainer] = []
+var graveyard_slots: Array[UnitContainer] = []
 
 var unit_01:Texture2D = preload("res://Assets/Textures/DemoAssets/Unit_01_Demo.png")
 
