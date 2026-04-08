@@ -1,6 +1,6 @@
 extends Node3D
 
-var bump_rate : float = 0.2
+var bump_rate : float = 1.2
 var current_bump = 0.0
 @onready var mon_spr = $Sprite3D
 @export var vert_bumping:bool = true
@@ -11,6 +11,8 @@ var current_bump = 0.0
 @export var drop_table:DropTableRes
 @onready var drop_util_scene = preload("res://Scenes/Util/ItemDropUtil.tscn")
 
+@onready var slime_test = $Slime
+@onready var slime_animation_player:AnimationPlayer = $Slime/AnimationPlayer
 var attack_tween
 var current_health
 var max_health
@@ -44,6 +46,7 @@ func take_damage(val) -> void:
 func attack_army() -> void:
 	if UnitManager.unit_slots.size() > 0:
 		var target_unit = null
+		slime_animation_player.play("SlimePunch")
 		for i in range(UnitManager.unit_slots.size()):
 			if UnitManager.unit_slots[i] != null:
 				target_unit = UnitManager.unit_slots[i]
@@ -53,6 +56,8 @@ func attack_army() -> void:
 		attack_tween = create_tween()
 		attack_tween.tween_property(mon_spr, "modulate", Color.RED, 0.5)
 		attack_tween.tween_property(mon_spr, "modulate", Color.WHITE, 0.5)
+		if target_unit == null:
+			return
 		target_unit.take_damage(enemy_resource.attack)
 
 func die()-> void:
@@ -76,6 +81,10 @@ func die()-> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if slime_animation_player.is_playing() and slime_animation_player.current_animation == "SlimePunch":
+		return
+	else:
+		slime_animation_player.queue("SlimeIdle")
 	if vert_bumping:
 		current_bump = fmod(current_bump + delta * bump_rate, TAU)
-		position.y = sin(current_bump) * 0.15
+		position.y = sin(current_bump) * 0.015

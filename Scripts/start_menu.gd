@@ -95,6 +95,7 @@ func load_game_slot_01():
 		ResourceManager.active_save_game = SaveGame.new()
 		ResourceManager.active_save_file_path = "user://SaveSlot1.tres"
 		ResourceManager.new_game = true
+		ResourceManager.save_game()
 		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot1.tres")
 		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
 
@@ -110,6 +111,7 @@ func load_game_slot_02():
 		ResourceManager.active_save_game = SaveGame.new()
 		ResourceManager.active_save_file_path = "user://SaveSlot2.tres"
 		ResourceManager.new_game = true
+		ResourceManager.save_game()
 		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot2.tres")
 		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
 
@@ -125,6 +127,7 @@ func load_game_slot_03():
 		ResourceManager.active_save_game = SaveGame.new()
 		ResourceManager.active_save_file_path = "user://SaveSlot3.tres"
 		ResourceManager.new_game = true
+		ResourceManager.save_game()
 		get_tree().change_scene_to_file("res://Scenes/IdleMap.tscn")
 		ResourceSaver.save(ResourceManager.active_save_game,"user://SaveSlot3.tres")
 

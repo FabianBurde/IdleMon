@@ -12,7 +12,7 @@ enum ItemType {
 @export var type: ItemType
 @export var is_stackable: bool
 @export var stack_size: int
-var current_stack_size:int = 1
+@export var current_stack_size:int = 1
 
 @export var item_tex: Texture2D
 @export var consume_effect: Dictionary = {}

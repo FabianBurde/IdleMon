@@ -40,14 +40,24 @@ func _process(delta: float) -> void:
 					unit.modulate = Color(1, 1, 1)
 
 func update_data():
+	if item_data == null:
+		item_stack_lbl.text = ""
+		return
+	#item_sprite.texture = item_data.item_tex
+	self.modulate = Color(1, 1, 1, 1)
+	self.mouse_filter = Control.MOUSE_FILTER_STOP
 	item_sprite.texture = item_data.item_tex
 	self.modulate = Color(1, 1, 1, 1)
 	self.mouse_filter = Control.MOUSE_FILTER_STOP
+	self.scale = Vector2(0.2, 0.2)
+	#self.create_tween().tween_property(self, "scale", Vector2(1, 1), 1.6).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	scale_tween(1.6,Tween.TRANS_ELASTIC)
 	if item_data.is_stackable:
 		item_stack_lbl.text = str(item_data.current_stack_size)
 	else:
 		item_stack_lbl.text = ""
 	set_tooltip()
+	get_parent().save_item_data()
 
 func scale_tween(time: float,trans: Tween.TransitionType) -> void:
 	self.scale = Vector2(0.2, 0.2)
@@ -80,6 +90,15 @@ func stop_drag() -> void:
 	if has_drop_target():
 		print("found target")
 		if swap_ref:
+			if swap_ref.item_data and item_data and swap_ref.item_data.name == item_data.name and swap_ref.item_data.is_stackable and item_data.is_stackable and swap_ref.item_data.current_stack_size + self.item_data.current_stack_size <= item_data.stack_size:
+				swap_ref.item_data.increase_stack_size(self.item_data.current_stack_size)
+				item_data = null
+				item_sprite.texture = null
+				update_data()
+				swap_ref.update_data()
+				self.global_position = drag_start_position
+				swap_ref = null
+				return
 			swap_items(swap_ref)
 			swap_ref = null
 		elif consume_ref:
@@ -105,8 +124,8 @@ func swap_items(target: InventoryItem) -> void:
 		self.item_data = temp_data
 		item_sprite.texture = item_data.item_tex
 		target.item_sprite.texture = target.item_data.item_tex
-		self.set_tooltip()
-		target.set_tooltip()
+		self.update_data()
+		target.update_data()
 	elif !target.disabled and target.item_data == null:
 		target.item_data = self.item_data
 		self.item_data = null
@@ -114,7 +133,8 @@ func swap_items(target: InventoryItem) -> void:
 		target.item_sprite.texture =  target.item_data.item_tex
 		self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		target.mouse_filter = Control.MOUSE_FILTER_STOP
-		self.set_tooltip()
+		self.update_data()
+		target.update_data()
 	print(item_data)
 	self.global_position = drag_start_position
 	#update visuals here
@@ -125,6 +145,7 @@ func consume() -> void:
 		self.item_data.decrease_stack_size(1)
 		self.global_position = drag_start_position
 		update_data()
+		#get_parent().save_item_data()
 		return
 	#apply item effect
 	#remove from inventory
@@ -134,6 +155,8 @@ func consume() -> void:
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	self.item_stack_lbl.text = ""
 	set_tooltip()
+	update_data()
+	#get_parent().save_item_data()
 
 func equip() -> void:
 	#apply item effect
@@ -143,3 +166,4 @@ func equip() -> void:
 	self.global_position = drag_start_position
 	self.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_tooltip()
+	get_parent().save_item_data()

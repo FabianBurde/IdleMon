@@ -47,6 +47,10 @@ func _ready() -> void:
 func debug_kill_current_enemy():
 	attack_enemy(99999999)
 
+func debug_drop_item():
+	var item_resource = AssetManager.get_item("health_potion_01").duplicate()
+	add_dropped_item(item_resource)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

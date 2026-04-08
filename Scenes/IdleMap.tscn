@@ -18,18 +18,18 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arf0q"]
 shader = ExtResource("4_8esda")
 shader_parameter/angle = -0.105
-shader_parameter/position = -0.075
-shader_parameter/spread = 0.3370000160075
-shader_parameter/cutoff = -0.917999996105
-shader_parameter/falloff = 0.88800004218
-shader_parameter/edge_fade = 0.6730000319675
-shader_parameter/speed = 1.0
+shader_parameter/position = -0.2
+shader_parameter/spread = 0.5010000237975
+shader_parameter/cutoff = -0.22899996337749995
+shader_parameter/falloff = 0.6910000328225
+shader_parameter/edge_fade = 0.6890000327275
+shader_parameter/speed = 2.0
 shader_parameter/ray1_density = 8.0
 shader_parameter/ray2_density = 30.0
 shader_parameter/ray2_intensity = 0.286000013585
-shader_parameter/color = Color(1, 0.9019608, 0.6509804, 0.5411765)
+shader_parameter/color = Color(0.9254902, 0.9411765, 0.3882353, 0.3137255)
 shader_parameter/hdr = false
-shader_parameter/seed = 234234.0
+shader_parameter/seed = 222.0
 
 [sub_resource type="Gradient" id="Gradient_obst2"]
 offsets = PackedFloat32Array(0, 0.54385966, 0.9883041)
@@ -495,6 +495,19 @@ offset_bottom = 2.1999989
 text = "Debug Kill"
 metadata/_edit_use_anchors_ = true
 
+[node name="Button2" type="Button" parent="UIUpper" unique_id=1156401422]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7792639
+anchor_top = 0.12
+anchor_right = 0.8832639
+anchor_bottom = 0.38
+offset_left = -0.71203613
+offset_right = -0.52001953
+offset_bottom = 4.999998
+text = "HP Pot Drop"
+metadata/_edit_use_anchors_ = true
+
 [node name="UILeft" type="Control" parent="." unique_id=699754646]
 layout_mode = 1
 anchor_top = 0.16700001
@@ -601,6 +614,7 @@ layout_mode = 2
 [connection signal="gui_input" from="MainMargin/UILower/Inventory/MarginContainer/VBoxContainer/TitleBar" to="MainMargin/UILower/Inventory" method="_on_title_bar_gui_input"]
 [connection signal="pressed" from="UIUpper/MiniMenu/InventoryBTN" to="." method="toggle_inventory"]
 [connection signal="pressed" from="UIUpper/Button" to="." method="debug_kill_current_enemy"]
+[connection signal="pressed" from="UIUpper/Button2" to="." method="debug_drop_item"]
 [connection signal="pressed" from="UILeft/VBoxContainer2/FoldableContainer/ScrollContainer/LeftMenu/UnitBoyBTN" to="." method="buy_unit_01"]
 [connection signal="pressed" from="UILeft/VBoxContainer2/FoldableContainer/ScrollContainer/LeftMenu/TextureButton2" to="MainMargin/UILower/MergeContainer" method="hide_show"]
 [connection signal="pressed" from="UILeft/VBoxContainer2/FoldableContainer/ScrollContainer/LeftMenu/Button" to="." method="manual_save"]

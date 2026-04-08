@@ -9,4 +9,5 @@ extends Resource
 @export var entity_id_counter: int = 0
 @export var player_stats: Dictionary = {}
 @export var units_cost_dict: Dictionary = {}
+@export var inventory_slots: int = 12
 @export var inventory_items: Array = [ItemRes]

@@ -31,6 +31,9 @@ var new_game: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().create_timer(1.0).timeout
+	if new_game:
+		inventory_items.resize(inventory_slots)
+		#inventory_items.fill(null)
 	SignalBus.update_ui_info.emit(global_gold, player_stats["exp"], player_stats["lvl"],LevelManager.enemies_in_level_killed)
 	save_timer = Timer.new()
 	save_timer.wait_time = 30.0
@@ -71,6 +74,7 @@ func load_savefile() -> void:
 	entity_id_counter = active_save_game.entity_id_counter
 	player_stats = active_save_game.player_stats
 	inventory_items = active_save_game.inventory_items
+	inventory_slots = active_save_game.inventory_slots
 	UnitManager.unit_cost_dict = active_save_game.units_cost_dict
 	SignalBus.update_ui_info.emit(global_gold, player_stats["exp"], player_stats["lvl"],LevelManager.enemies_in_level_killed)
 	SignalBus.units_loaded.emit()
@@ -96,6 +100,7 @@ func save_game() -> void:
 	active_save_game.player_stats = player_stats
 	active_save_game.inventory_items = inventory_items
 	active_save_game.units_cost_dict = UnitManager.unit_cost_dict
+	active_save_game.inventory_slots = inventory_slots
 	var error_code = ResourceSaver.save(active_save_game, active_save_file_path)
 	if error_code != OK:
 		print("Error saving game: ", error_code)
